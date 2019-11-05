@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title><%= title %></title>
+	<% include meta %>
+	<% include ../../elements/meta %>
+</head>
+
+<body>
+	<% include ../../elements/navbar %>
+
+	<div class="container">
+		<div class="row tm-content-row">
+			<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 tm-block-col">
+
+				<h2 class="tm-block-title">Biểu đồ tuần</h2>
+				<canvas id="lineChart"></canvas>
+			</div>
+		</div>
+		<div class="wrap-table100">
+			<div class="table100 ver1">
+				<div class="table100-firstcol">
+					<table>
+						<thead>
+							<tr class="row100 head">
+								<th class="cell100 column1">Thứ</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="row100 body">
+								<td class="cell100 column1">Hai</td>
+							</tr>
+
+							<tr class="row100 body">
+								<td class="cell100 column1">Ba</td>
+							</tr>
+
+							<tr class="row100 body">
+								<td class="cell100 column1">Tư</td>
+							</tr>
+
+							<tr class="row100 body">
+								<td class="cell100 column1">Năm</td>
+							</tr>
+
+							<tr class="row100 body">
+								<td class="cell100 column1">Sáu</td>
+							</tr>
+
+							<tr class="row100 body">
+								<td class="cell100 column1">Bảy</td>
+							</tr>
+
+							<tr class="row100 body">
+								<td class="cell100 column1">Chủ nhật</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+				<div class="wrap-table100-nextcols js-pscroll">
+					<div class="table100-nextcols">
+						<table>
+							<thead>
+								<tr class="row100 head">
+									<th class="cell100 column2">Tổng thu</th>
+									<th class="cell100 column3">Tổng chi</th>
+									<th class="cell100 column4">Thu nhập thực tế</th>
+									<th class="cell100 column5">Kì vọng</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="row100 body">
+									<td class="cell100 column2">300.000</td>
+									<td class="cell100 column3">100.000</td>
+									<td class="cell100 column4">200.000</td>
+									<td class="cell100 column5">300.000</td>
+								</tr>
+
+								<tr class="row100 body">
+									<td class="cell100 column2">350.000</td>
+									<td class="cell100 column3">50.000</td>
+									<td class="cell100 column4">300.000</td>
+									<td class="cell100 column5">350.000</td>
+								</tr>
+
+								<tr class="row100 body">
+									<td class="cell100 column2">200.000</td>
+									<td class="cell100 column3">0</td>
+									<td class="cell100 column4">200.000</td>
+									<td class="cell100 column5">300.000</td>
+								</tr>
+
+								<tr class="row100 body">
+									<td class="cell100 column2">400.000</td>
+									<td class="cell100 column3">100.000</td>
+									<td class="cell100 column4">300.000</td>
+									<td class="cell100 column5">250.000</td>
+								</tr>
+
+								<tr class="row100 body">
+									<td class="cell100 column2">400.000</td>
+									<td class="cell100 column3">150.000</td>
+									<td class="cell100 column4">250.000</td>
+									<td class="cell100 column5">300.000</td>
+								</tr>
+
+								<tr class="row100 body">
+									<td class="cell100 column2">500.000</td>
+									<td class="cell100 column3">100.000</td>
+									<td class="cell100 column4">200.000</td>
+									<td class="cell100 column5">350.000</td>
+								</tr>
+
+								<tr class="row100 body">
+									<td class="cell100 column2">400.000</td>
+									<td class="cell100 column3">0</td>
+									<td class="cell100 column4">400.000</td>
+									<td class="cell100 column5">400.000</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<% include ../../elements/footer%>
+
+	<% include scripts %>
+
+	<% include ../../elements/scripts %>
+	<script src="javascripts/week-chart.js"></script>
+
+</body>
+
+</html>

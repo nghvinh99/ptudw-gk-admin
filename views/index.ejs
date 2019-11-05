@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title><%= title %></title>
+    <% include elements/meta %>
+</head>
+
+<body id="reportsPage">
+    <div class="" id="home">
+        <% include elements/navbar %>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <p class="text-white mt-5 mb-5">Chào mừng, <b>quản trị viên</b></p>
+                </div>
+            </div>
+            <!-- row -->
+            <div class="row tm-content-row">
+                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
+                    <div class="tm-bg-primary-dark tm-block">
+                        <h2 class="tm-block-title">Thống kê tháng này</h2>
+                        <canvas id="lineChart"></canvas>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
+                    <div class="tm-bg-primary-dark tm-block tm-block-taller">
+                        <h2 class="tm-block-title">Thống kê tình trạng đơn hàng</h2>
+                        <div id="pieChartContainer">
+                            <canvas id="pieChart" class="chartjs-render-monitor" width="200" height="200"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
+                    <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
+                        <h2 class="tm-block-title">Top 10 bán chạy</h2>
+                        <div class="tm-product-table-container">
+                            <table class="table table-hover tm-table-small tm-product-table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">TÊN SẢN PHẨM</th>
+                                        <th scope="col">ĐÃ BÁN</th>
+                                        <th scope="col">TỒN KHO</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="tm-product-name">Áo khoác jean</td>
+                                        <td>100</td>
+                                        <td>25</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tm-product-name">Áo sơ mi caro Hàn Quốc</td>
+                                        <td>100</td>
+                                        <td>40</td>
+                                        
+                                    </tr>
+                                    <tr>
+                                        <td class="tm-product-name">Váy đen</td>
+                                        <td>80</td>
+                                        <td>10</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tm-product-name">Áo thun bóng đá</td>
+                                        <td>70</td>
+                                        <td>100</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tm-product-name">Quần jean</td>
+                                        <td>60</td>
+                                        <td>40</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tm-product-name">Giày Nike</td>
+                                        <td>50</td>
+                                        <td>10</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tm-product-name">Mũ lưỡi trai X</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tm-product-name">Váy Trắng</td>
+                                        <td>30</td>
+                                        <td>40</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tm-product-name">Áo khoác nữ</td>
+                                        <td>20</td>
+                                        <td>40</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tm-product-name">Quần jogger</td>
+                                        <td>20</td>
+                                        <td>10</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
+                    <div class="tm-bg-primary-dark tm-block tm-block-taller tm-block-overflow">
+                        <h2 class="tm-block-title">Thông báo</h2>
+                        <div class="tm-notification-items">
+                            <div class="media tm-notification-item">
+                                <div class="tm-gray-circle"><img src="/images/notification-01.jpg" alt="Avatar Image"
+                                        class="rounded-circle"></div>
+                                <div class="media-body">
+                                    <p class="mb-2"><b>Hoa</b> và <b>6 người khác</b> gửi bạn <a href="/index"
+                                            class="tm-notification-link">cập nhật sản phẩm mới</a>. Kiểm tra đơn hàng.</p>
+                                    <span class="tm-small tm-text-color-secondary">6 giờ trước.</span>
+                                </div>
+                            </div>
+                            <div class="media tm-notification-item">
+                                <div class="tm-gray-circle"><img src="/images/notification-02.jpg" alt="Avatar Image"
+                                        class="rounded-circle"></div>
+                                <div class="media-body">
+                                    <p class="mb-2"><b>Thu </b> và <b>5 người khác</b> gửi bạn <a href="/index"
+                                            class="tm-notification-link">Cập nhật trùng</a>. Đọc thêm.</p>
+                                    <span class="tm-small tm-text-color-secondary">6 giờ trước.</span>
+                                </div>
+                            </div>
+                            <div class="media tm-notification-item">
+                                <div class="tm-gray-circle"><img src="/images/notification-03.jpg" alt="Avatar Image"
+                                        class="rounded-circle"></div>
+                                <div class="media-body">
+                                    <p class="mb-2"><b>Vi</b> và <b>7 người khác</b> gửi ban <a href="/index"
+                                            class="tm-notification-link">cập nhật đơn hàng</a>. Xem thông tin đơn hàng.</p>
+                                    <span class="tm-small tm-text-color-secondary">7 giờ trước.</span>
+                                </div>
+                            </div>
+                            <div class="media tm-notification-item">
+                                <div class="tm-gray-circle"><img src="/images/notification-01.jpg" alt="Avatar Image"
+                                        class="rounded-circle"></div>
+                                <div class="media-body">
+                                    <p class="mb-2"><b>Cúc </b> và <b>3 người khác</b> gửi bạn <a href="/index"
+                                            class="tm-notification-link">ghi chú sản phẩm</a>.</p>
+                                    <span class="tm-small tm-text-color-secondary">8 giờ trước.</span>
+                                </div>
+                            </div>
+                            <div class="media tm-notification-item">
+                                <div class="tm-gray-circle"><img src="/images/notification-02.jpg" alt="Avatar Image"
+                                        class="rounded-circle"></div>
+                                <div class="media-body">
+                                    <p class="mb-2"><b>Nhi </b> và <b>5 người khác</b> gửi bạn <a href="/index"
+                                            class="tm-notification-link">hàng được đặt</a>.</p>
+                                    <span class="tm-small tm-text-color-secondary">8 giờ trước.</span>
+                                </div>
+                            </div>
+                            <div class="media tm-notification-item">
+                                <div class="tm-gray-circle"><img src="/images/notification-03.jpg" alt="Avatar Image"
+                                        class="rounded-circle"></div>
+                                <div class="media-body">
+                                    <p class="mb-2"><b>Tường </b> và <b>2 người khác </b> gửi bạn <a href="/index"
+                                            class="tm-notification-link">cập nhật sản phẩm</a>.</p>
+                                    <span class="tm-small tm-text-color-secondary">8 giờ trước.</span>
+                                </div>
+                            </div>
+                            <div class="media tm-notification-item">
+                                <div class="tm-gray-circle"><img src="/images/notification-01.jpg" alt="Avatar Image"
+                                        class="rounded-circle"></div>
+                                <div class="media-body">
+                                    <p class="mb-2"><b>Ly </b> và <b>3 người khác</b> gửi bạn <a href="/index"
+                                            class="tm-notification-link">cập nhật sản phẩm</a>.</p>
+                                    <span class="tm-small tm-text-color-secondary">10 giờ trước.</span>
+                                </div>
+                            </div>
+                            <div class="media tm-notification-item">
+                                <div class="tm-gray-circle"><img src="/images/notification-02.jpg" alt="Avatar Image"
+                                        class="rounded-circle"></div>
+                                <div class="media-body">
+                                    <p class="mb-2"><b>Ngân </b> và <b>6 người khác</b> gửi bạn <a href="/index"
+                                            class="tm-notification-link">cập nhật sản phẩm</a>.</p>
+                                    <span class="tm-small tm-text-color-secondary">10 giờ trước.</span>
+                                </div>
+                            </div>
+                            <div class="media tm-notification-item">
+                                <div class="tm-gray-circle"><img src="/images/notification-03.jpg" alt="Avatar Image"
+                                        class="rounded-circle"></div>
+                                <div class="media-body">
+                                    <p class="mb-2"><b>Lệ</b> và <b>4 người khác</b> gửi bạn <a href="/index"
+                                            class="tm-notification-link">cập nhật sản phẩm</a>.</p>
+                                    <span class="tm-small tm-text-color-secondary">10 giờ trước.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% include elements/footer %>
+    </div>
+
+    <% include elements/scripts %>
+    <script src="javascripts/tooplate-scripts.js"></script>
+</body>
+
+</html>

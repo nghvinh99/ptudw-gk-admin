@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title><%= title %></title>
+	<% include meta %>
+	<% include ../../elements/meta %>
+</head>
+
+<body>
+	<% include ../../elements/navbar %>
+
+	<div class="container">
+		<div class="row tm-content-row">
+			<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 tm-block-col">
+
+				<h2 class="tm-block-title">Biểu đồ năm</h2>
+				<canvas id="lineChart"></canvas>
+			</div>
+		</div>
+		<div class="wrap-table100">
+			<div class="table100 ver1">
+				<div class="table100-firstcol">
+					<table>
+						<thead>
+							<tr class="row100 head">
+								<th class="cell100 column1">Năm</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="row100 body">
+								<td class="cell100 column1">2015</td>
+							</tr>
+
+							<tr class="row100 body">
+								<td class="cell100 column1">2016</td>
+							</tr>
+
+							<tr class="row100 body">
+								<td class="cell100 column1">2017</td>
+							</tr>
+
+							<tr class="row100 body">
+								<td class="cell100 column1">2018</td>
+							</tr>
+
+							<tr class="row100 body">
+								<td class="cell100 column1">2019</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+				<div class="wrap-table100-nextcols js-pscroll">
+					<div class="table100-nextcols">
+						<table>
+							<thead>
+								<tr class="row100 head">
+									<th class="cell100 column2">Tổng thu</th>
+									<th class="cell100 column3">Tổng chi</th>
+									<th class="cell100 column4">Thu nhập thực tế</th>
+									<th class="cell100 column5">Kì vọng</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="row100 body">
+									<td class="cell100 column2">1300.000</td>
+									<td class="cell100 column3">300.000</td>
+									<td class="cell100 column4">1000.000</td>
+									<td class="cell100 column5">1300.000</td>
+								</tr>
+
+								<tr class="row100 body">
+									<td class="cell100 column2">1450.000</td>
+									<td class="cell100 column3">150.000</td>
+									<td class="cell100 column4">1300.000</td>
+									<td class="cell100 column5">1350.000</td>
+								</tr>
+
+								<tr class="row100 body">
+									<td class="cell100 column2">1500.000</td>
+									<td class="cell100 column3">300.000</td>
+									<td class="cell100 column4">1200.000</td>
+									<td class="cell100 column5">1300.000</td>
+								</tr>
+
+								<tr class="row100 body">
+									<td class="cell100 column2">1400.000</td>
+									<td class="cell100 column3">100.000</td>
+									<td class="cell100 column4">1300.000</td>
+									<td class="cell100 column5">1250.000</td>
+								</tr>
+
+								<tr class="row100 body">
+									<td class="cell100 column2">2400.000</td>
+									<td class="cell100 column3">400.000</td>
+									<td class="cell100 column4">2000.000</td>
+									<td class="cell100 column5">1500.000</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<% include ../../elements/footer%>
+
+	<% include scripts %>
+
+	<% include ../../elements/scripts %>
+	<script src="javascripts/year-chart.js"></script>
+
+</body>
+
+</html>

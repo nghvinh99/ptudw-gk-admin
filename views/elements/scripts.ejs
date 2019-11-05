@@ -1,0 +1,43 @@
+<script src="javascripts/jquery-3.3.1.min.js"></script>
+<script src="javascripts/moment.min.js"></script>
+<script src="javascripts/Chart.min.js"></script>
+<script src="javascripts/bootstrap.min.js"></script>
+<script>
+  Chart.defaults.global.defaultFontColor = 'white';
+  let ctxLine,
+    ctxBar,
+    ctxPie,
+    optionsLine,
+    optionsBar,
+    optionsPie,
+    configLine,
+    configBar,
+    configPie,
+    lineChart,
+  barChart, pieChart;
+  // DOM is ready
+  $(function () {
+    drawLineChart(); // Line Chart
+    drawBarChart(); // Bar Chart
+    drawPieChart(); // Pie Chart
+
+    $(window).resize(function () {
+      updateLineChart();
+      updateBarChart();
+    });
+  })
+</script>
+<script>
+  $(function () {
+    $(".tm-product-name").on("click", function () {
+      window.location.href = "/products/edit";
+    });
+  });
+</script>
+<script>
+  $(function () {
+    $("#expire_date").datepicker({
+      defaultDate: "10/22/2020"
+    });
+  });
+</script>
