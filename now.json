@@ -1,0 +1,16 @@
+{
+    "version": 2,
+    "builds": [
+	{ "src": "package.json", "use": "@now/static-build"},
+	{ "src": "./index.js", "use": "@now/node-server" },
+   { "src": "./app.js", "use": "@now/node-server" },
+   { "src": "./routes/*.js", "use": "@now/node-server" }
+    ],
+    "routes": [
+	{ "src": "/", "dest": "./routes/index.js" },
+	{ "src": "/orders", "dest": "/" },
+   { "src": "/products", "dest": "/" },
+   { "src": "/reports", "dest": "/" },
+   { "src": "/users", "dest": "/" }
+    ]
+}
