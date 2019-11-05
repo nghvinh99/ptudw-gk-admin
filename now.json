@@ -9,8 +9,8 @@
     "routes": [
 	{ "src": "/", "dest": "./routes/index.js" },
 	{ "src": "/index", "dest": "/" },
-   { "src": "/orders", "dest": "/" },
-   { "src": "/products", "dest": "/" },
+   { "src": "/orders/", "dest": "/" },
+   { "src": "/products/", "dest": "/" },
    { "src": "/products/edit", "dest": "/" },
    { "src": "/products/add", "dest": "/" },
    { "src": "/reports/", "dest": "/" },
@@ -19,6 +19,6 @@
    { "src": "/reports/month", "dest": "/" },
    { "src": "/reports/quarter", "dest": "/" },
    { "src": "/reports/year", "dest": "/" },
-   { "src": "/users", "dest": "/" }
+   { "src": "/users/", "dest": "/" }
     ]
 }
