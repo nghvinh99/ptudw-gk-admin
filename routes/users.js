@@ -1,9 +1,8 @@
 var express = require('express');
 var router = express.Router();
+const users = require('../controllers/users');
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.render('pages/users/accounts', { title: 'Tài khoản' });
-});
+router.get('/', users.getUsers);
 
 module.exports = router;

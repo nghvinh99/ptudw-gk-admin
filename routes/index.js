@@ -1,40 +1,14 @@
 var express = require('express');
 var router = express.Router();
-const passport = require('../config/passport');
-const { Admin } = require('../models/');
+const index = require('../controllers/index');
 
 /* GET home page. */
-router.get('/login', function (req, res, next) {
-  if (req.isAuthenticated()) {
-    res.redirect('/');
-  }
-  const errors = req.flash().error || [];
-  res.render('login',
-    {
-      title: 'Đăng nhập',
-      errors
-    });
-});
+router.get('/login', index.login);
 
-router.post('/login', passport.authenticate('local',
-  {
-    successRedirect: '/',
-    failureRedirect: '/login',
-    failureFlash: true
-  })
-);
+router.post('/login', index.authentication);
 
-router.get('/logout', function (req, res, next) {
-  req.logout();
-  res.redirect('/');
-});
+router.get('/logout', index.logout);
 
-router.get('/',
-  authenticationCheck(),
-  function (req, res, next) {
-    res.render('index',
-      { title: 'Dashboard' });
-  }
-);
+router.get('/', index.authenticationCheck, index.dashboard);
 
 module.exports = router;

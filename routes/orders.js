@@ -1,9 +1,8 @@
 var express = require('express');
 var router = express.Router();
+const orders = require('../controllers/orders');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('pages/orders/list', { title: 'Đơn hàng' });
-});
+router.get('/', orders.getOrders);
 
 module.exports = router;

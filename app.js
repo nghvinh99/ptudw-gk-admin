@@ -44,13 +44,13 @@ app.use(function(req, res, next) {
 
 app.use(flash());
 
-app.all('*',function(req,res,next){
-  if(req.isAuthenticated() || req.url === '/login'){
-      next();
-  } else {
-      res.redirect('/login');
-  }
-});
+// app.all('*',function(req,res,next){
+//   if(req.isAuthenticated() || req.url === '/login'){
+//       next();
+//   } else {
+//       res.redirect('/login');
+//   }
+// });
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

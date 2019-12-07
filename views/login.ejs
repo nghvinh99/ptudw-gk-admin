@@ -16,6 +16,12 @@
               <h2 class="tm-block-title mb-4">Chào mừng, vui lòng đăng nhập</h2>
             </div>
           </div>
+          <% for (let i=0;i<errors.length;i++) { %>
+              <div class="alert alert-danger" role="alert">
+                  <%= errors[i] %>
+                </div>
+          <% } %>
+
           <div class="row mt-2">
             <div class="col-12">
               <form method="POST" class="tm-login-form">
