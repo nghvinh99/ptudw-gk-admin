@@ -2,11 +2,11 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var logger = require('morgan');
-var session = require('express-session');
-var passport = require('./config/passport');
-var flash = require('connect-flash');
+const bodyParser = require('body-parser');
+const logger = require('morgan');
+const session = require('express-session');
+const passport = require('./config/passport');
+const flash = require('connect-flash');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -44,13 +44,13 @@ app.use(function(req, res, next) {
 
 app.use(flash());
 
-// app.all('*',function(req,res,next){
-//   if(req.isAuthenticated() || req.url === '/login'){
-//       next();
-//   } else {
-//       res.redirect('/login');
-//   }
-// });
+app.all('*',function(req,res,next){
+  if(req.isAuthenticated() || req.url === '/login'){
+      next();
+  } else {
+      res.redirect('/login');
+  }
+});
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

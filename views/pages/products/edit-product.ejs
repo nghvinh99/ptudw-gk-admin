@@ -19,45 +19,51 @@
           </div>
           <div class="row tm-edit-product-row">
             <div class="col-xl-6 col-lg-6 col-md-12">
-              <form action="" method="post" class="tm-edit-product-form">
+              <form method="POST" class="tm-edit-product-form">
                 <div class="form-group mb-3">
                   <label for="name">Tên sản phẩm
                   </label>
-                  <input id="name" name="name" type="text" value="Áo khoác..." class="form-control validate" />
-                </div>
-                <div class="form-group mb-3">
-                  <label for="description">Mô tả</label>
-                  <textarea class="form-control validate tm-small" rows="5"
-                    required>Áo khoác nam phù hợp với các chuyến du lịch đi xa.</textarea>
-                </div>
-                <div class="form-group mb-3">
-                  <label for="category">Phân loại</label>
-                  <select class="custom-select tm-select-accounts" id="category">
-                    <option>Chọn loại</option>
-                    <option value="1" selected>Hàng mới</option>
-                    <option value="2">Hàng phổ biến</option>
-                    <option value="3">Xu hướng</option>
-                    <option value="4">Thời trang nam</option>
-                    <option value="5">Thời trang nữ</option>
-                    <option value="6">Phụ kiện</option>
-                    <option value="7">Giày</option>
-                    <option value="8">Mũ</option>
-                  </select>
+                  <input id="name" name="name" type="text" value="<%= product.name %>" class="form-control validate" />
                 </div>
                 <div class="row">
                   <div class="form-group mb-3 col-xs-12 col-sm-6">
-                    <label for="expire_date">Hạn sử dụng
+                    <label for="price">Giá
                     </label>
-                    <input id="expire_date" name="expire_date" type="text" value=""
-                      class="form-control validate" data-large-mode="true" />
+                    <input id="price" name="price" type="text" value="<%= product.price %>" class="form-control validate" data-large-mode="true" />
                   </div>
                   <div class="form-group mb-3 col-xs-12 col-sm-6">
                     <label for="stock">Số lượng trong kho
                     </label>
-                    <input id="stock" name="stock" type="text" value="10" class="form-control validate" />
+                    <input id="stock" name="stock" type="text" value="<%= product.quantity %>" class="form-control validate"/>
                   </div>
                 </div>
-
+                <div class="form-group mb-3">
+                  <label for="group">Phân nhóm</label>
+                  <select class="custom-select tm-select-accounts" id="group">
+                    <option selected value=<%= product.groupId %>><%= pInfo.group.name %></option>
+                    <% group.forEach((group) => { if (group.id != product.groupId) { %>
+                    <option value=<%= group.id %>><%= group.name %></option>
+                    <% }}) %>
+                  </select>
+                </div>
+                <div class="form-group mb-3">
+                  <label for="type">Phân loại</label>
+                  <select class="custom-select tm-select-accounts" id="type">
+                    <option selected value=<%= product.typeId %>><%= pInfo.type.name %></option>
+                    <% type.forEach((type) => { if (type.id != product.typeId) { %>
+                    <option value=<%= type.id %>><%= type.name %></option>
+                    <% }}) %>
+                  </select>
+                </div>
+                <div class="form-group mb-3">
+                  <label for="brand">Hãng sản xuất</label>
+                  <select class="custom-select tm-select-accounts" id="brand">
+                      <option selected value=<%= product.brandId %>><%= pInfo.brand.name %></option>
+                    <% brand.forEach((brand) => { if (brand.id != product.brandId) { %>
+                    <option value=<%= brand.id %>><%= brand.name %></option>
+                    <% }}) %>
+                  </select>
+                </div>
             </div>
             <div class="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">
               <div class="tm-product-img-edit mx-auto">

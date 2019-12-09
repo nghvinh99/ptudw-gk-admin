@@ -12,7 +12,7 @@
 
 1. 1712061 - Lâm Quỳnh Hương
 2. 1712103 - Ngô Minh Nghĩa
-3. 171226 - Nguyễn Hữu Vinh
+3. 1712206 - Nguyễn Hữu Vinh
 
 ## Thông tin đồ án:
 
