@@ -9,7 +9,7 @@ const cloudinary = require('../config/cloudinary');
 const productsController = {};
 
 productsController.getProducts = async (req, res, next) => {
-    const products = await Product.findAll({ raw: true });
+    const products = await Product.findAll({ raw: true , order: [['id', 'ASC']]});
     const brand = await Brand.findAll({ raw: true });
     const type = await Type.findAll({ raw: true });
     const group = await Group.findAll({ raw: true });
@@ -22,15 +22,17 @@ productsController.getProducts = async (req, res, next) => {
 
 productsController.edit = async (req, res, next) => {
     const id = req.params.id;
+
     const product = await Product.findOne({
         where: { id: id },
         raw: true
     });
-    const pBrand = await Brand.findOne({ where: { id: product.brandId } });
-    const pType = await Type.findOne({ where: { id: product.typeId } });
-    const pGroup = await Group.findOne({ where: { id: product.groupId } });
 
-    const pInfo = { brand: pBrand, type: pType, group: pGroup };
+    const pInfo = {
+        brand : await Brand.findOne({ where: { id: product.brandId } }),
+        type : await Type.findOne({ where: { id: product.typeId } }),
+        group : await Group.findOne({ where: { id: product.groupId } }),
+    }
     
     const brand = await Brand.findAll({ raw: true });
     const type = await Type.findAll({ raw: true });
@@ -41,6 +43,21 @@ productsController.edit = async (req, res, next) => {
             title: 'Cập nhật sản phẩm',
             product, brand, type, group, pInfo
         });
+}
+
+productsController.editPost = (req, res, next) => {
+    const info = {
+        id : req.params.id,
+        name : req.body.name,
+        price : req.body.price,
+        quantity : req.body.quantity,
+        brand : req.body.brand,
+        group : req.body.group,
+        type : req.body.type,
+    }
+    Product.edit(info, () => {
+        res.redirect('/products');
+    });
 }
 
 productsController.add = async (req, res, next) => {
@@ -57,32 +74,25 @@ productsController.add = async (req, res, next) => {
 productsController.upload = upload.array('productImage', 4);
 
 productsController.addPost = async (req, res, next) => {
-    const name = req.body.name;
-    const price = req.body.price;
-    const quantity = req.body.quantity;
-    const group = req.body.group;
-    const type = req.body.type;
-    const brand = req.body.brand;
+    const info = {
+        name : req.body.name,
+        price : req.body.price,
+        quantity : req.body.quantity,
+        group : req.body.group,
+        type : req.body.type,
+        brand : req.body.brand,
+        URLs : [],
+    }
 
-    const URLs = [];
     for (let file of req.files) {
         const cloudPath = await cloudinary.uploads(file.path);
-        URLs.push(cloudPath.url);
+        info.URLs.push(cloudPath.url);
         fs.unlinkSync(file.path);
     }
 
-    Product.create({
-        name: name,
-        price: price,
-        images: URLs,
-        quantity: quantity,
-        views: '0',
-        brandId: brand,
-        groupId: group,
-        typeId: type
+    Product.add(info, () => {
+        res.redirect('/products');
     });
-
-    res.redirect('/products');
 }
 
 productsController.delete = (req, res, next) => {

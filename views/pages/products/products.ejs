@@ -28,7 +28,7 @@
               <tbody>
                 <% products.forEach((product) => { %>
                 <tr>
-                  <th scope="row"><input type="checkbox" name="<%= product.id %>" value="true"></th>
+                  <th scope="row"></th>
                   <td onclick="location.href='products/edit/<%= product.id %>'"><%= product.name %></td>
                   <td onclick="location.href='products/edit/<%= product.id %>'"><%= product.price %></td>
                   <td onclick="location.href='products/edit/<%= product.id %>'"><%= product.views %></td>
@@ -46,9 +46,6 @@
           </div>
           <!-- table container -->
           <a href="/products/add" class="btn btn-primary btn-block text-uppercase mb-3">THÊM SẢN PHẨM MỚI</a>
-          <button class="btn btn-primary btn-block text-uppercase">
-            Xóa sản phẩm đã chọn
-          </button>
         </div>
       </div>
 

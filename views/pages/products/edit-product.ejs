@@ -34,12 +34,12 @@
                   <div class="form-group mb-3 col-xs-12 col-sm-6">
                     <label for="stock">Số lượng trong kho
                     </label>
-                    <input id="stock" name="stock" type="text" value="<%= product.quantity %>" class="form-control validate"/>
+                    <input id="quantity" name="quantity" type="text" value="<%= product.quantity %>" class="form-control validate"/>
                   </div>
                 </div>
                 <div class="form-group mb-3">
                   <label for="group">Phân nhóm</label>
-                  <select class="custom-select tm-select-accounts" id="group">
+                  <select class="custom-select tm-select-accounts" id="group" name="group">
                     <option selected value=<%= product.groupId %>><%= pInfo.group.name %></option>
                     <% group.forEach((group) => { if (group.id != product.groupId) { %>
                     <option value=<%= group.id %>><%= group.name %></option>
@@ -48,7 +48,7 @@
                 </div>
                 <div class="form-group mb-3">
                   <label for="type">Phân loại</label>
-                  <select class="custom-select tm-select-accounts" id="type">
+                  <select class="custom-select tm-select-accounts" id="type" name="type">
                     <option selected value=<%= product.typeId %>><%= pInfo.type.name %></option>
                     <% type.forEach((type) => { if (type.id != product.typeId) { %>
                     <option value=<%= type.id %>><%= type.name %></option>
@@ -57,7 +57,7 @@
                 </div>
                 <div class="form-group mb-3">
                   <label for="brand">Hãng sản xuất</label>
-                  <select class="custom-select tm-select-accounts" id="brand">
+                  <select class="custom-select tm-select-accounts" id="brand" name="brand">
                       <option selected value=<%= product.brandId %>><%= pInfo.brand.name %></option>
                     <% brand.forEach((brand) => { if (brand.id != product.brandId) { %>
                     <option value=<%= brand.id %>><%= brand.name %></option>
