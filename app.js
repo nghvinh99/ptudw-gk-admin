@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
+const dotenv = require('dotenv').config();
 const session = require('express-session');
 const passport = require('./config/passport');
 const flash = require('connect-flash');
@@ -44,13 +45,13 @@ app.use(function(req, res, next) {
 
 app.use(flash());
 
-app.all('*',function(req,res,next){
-  if(req.isAuthenticated() || req.url === '/login'){
-      next();
-  } else {
-      res.redirect('/login');
-  }
-});
+// app.all('*',function(req,res,next){
+//   if(req.isAuthenticated() || req.url === '/login'){
+//       next();
+//   } else {
+//       res.redirect('/login');
+//   }
+// });
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

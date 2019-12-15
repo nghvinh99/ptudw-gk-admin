@@ -1,4 +1,4 @@
-{
+module.exports = {
   "development": {
     "username": "postgres",
     "password": "data123",
@@ -14,10 +14,11 @@
     "dialect": "postgres"
   },
   "production": {
-    "username": "postgres",
-    "password": "data123",
-    "database": "DB_WinterShop",
-    "host": "localhost",
-    "dialect": "postgres"
+    "username": process.env.DB_USER,
+    "password": process.env.DB_PASSWORD,
+    "database": process.env.DB_NAME,
+    "host": process.env.DB_HOST,
+    "dialect": process.env.DB_DIALECT,
+    "port": process.env.DB_PORT
   }
 }
