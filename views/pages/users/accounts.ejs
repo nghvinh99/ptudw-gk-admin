@@ -16,8 +16,7 @@
             <h2 class="tm-block-title">Tài khoản người dùng</h2>
             <p class="text-white">Loại tài khoản</p>
             <select class="custom-select" id="accountType">
-              <option value="" disabled selected hidden>Chọn loại tài khoản...</option>
-              <option value="0">Khách hàng</option>
+              <option value="0" selected>Khách hàng</option>
               <option value="1">Quản trị viên</option>
             </select>
             <br>
@@ -25,6 +24,7 @@
             <table class="table table-hover tm-table-small tm-user-table">
               <thead>
                 <tr>
+                  <th scope="col">STT</th>
                   <th scope="col">TÊN KHÁCH HÀNG</th>
                   <th scope="col">EMAIL</th>
                   <th scope="col">SỐ ĐIỆN THOẠI</th>
@@ -37,6 +37,11 @@
                 </tr>
               </tbody>
             </table>
+            <div style="text-align: center;" >
+              <button id="firstUserPage" type="button" class="btn btn-outline-light btn-custom">&laquo;</button>
+              <button id="prevUserPage" type="button" class="btn btn-outline-light btn-custom"><</button>
+              <button id="nextUserPage" type="button" class="btn btn-outline-light btn-custom">></button>
+              <button id="lastUserPage" value="<%= lastPage %>" type="button" class="btn btn-outline-light btn-custom">&raquo;</button>
           </div>
         </div>
       </div>
@@ -44,52 +49,42 @@
       <div class="row tm-content-row">
         <div class="tm-block-col tm-col-avatar">
           <div class="tm-bg-primary-dark tm-block tm-block-avatar">
-            <h2 class="tm-block-title">Đổi ảnh đại diện</h2>
+            <h2 class="tm-block-title">Ảnh đại diện</h2>
             <div class="tm-avatar-container">
               <img src="/images/avatar.png" alt="Avatar" class="tm-avatar img-fluid mb-4" />
               <a href="#" class="tm-avatar-delete-link">
                 <i class="far fa-trash-alt tm-product-delete-icon"></i>
               </a>
             </div>
-            <button class="btn btn-primary btn-block text-uppercase">
-              Tải ảnh mới
-            </button>
           </div>
         </div>
         <div class="tm-block-col tm-col-account-settings">
           <div class="tm-bg-primary-dark tm-block tm-block-settings">
-            <h2 class="tm-block-title">Cập nhật tài khoản</h2>
+            <h2 class="tm-block-title">Thông tin tài khoản</h2>
             <form action="" class="tm-signup-form row">
               <div class="form-group col-lg-6">
-                <label for="name">Tên tài khoản</label>
-                <input id="name" name="name" type="text" class="form-control validate" />
+                <label for="name">Tên khách hàng</label>
+                <span id="name" class="form-control validate">
               </div>
               <div class="form-group col-lg-6">
-                <label for="email">Địa chỉ email</label>
-                <input id="email" name="email" type="email" class="form-control validate" />
+                <label for="DoB">Ngày sinh</label>
+                <span id="DoB" class="form-control validate">
               </div>
               <div class="form-group col-lg-6">
-                <label for="password">Mật khẩu</label>
-                <input id="password" name="password" type="password" class="form-control validate" />
-              </div>
-              <div class="form-group col-lg-6">
-                <label for="password2">Xác nhận mật khẩu</label>
-                <input id="password2" name="password2" type="password" class="form-control validate" />
+                <label for="email">Email</label>
+                <span id="email" class="form-control validate">
               </div>
               <div class="form-group col-lg-6">
                 <label for="phone">Số điện thoại</label>
-                <input id="phone" name="phone" type="tel" class="form-control validate" />
+                <span id="phone" class="form-control validate">
               </div>
               <div class="form-group col-lg-6">
-                <label class="tm-hide-sm">&nbsp;</label>
-                <button type="submit" class="btn btn-primary btn-block text-uppercase">
-                  Xóa tài khoản
-                </button>
+                <label for="gender">Giới tính</label>
+                <span id="gender" class="form-control validate">
               </div>
-              <div class="col-12">
-                <button type="submit" class="btn btn-primary btn-block text-uppercase">
-                  Cập nhật thông tin
-                </button>
+              <div class="form-group col-lg-6">
+                <label for="account">Tài khoản</label>
+                <span id="account" class="form-control validate">
               </div>
             </form>
           </div>

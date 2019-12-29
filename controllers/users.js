@@ -4,7 +4,17 @@ const { User } = require('../models/');
 const usersController = {};
 
 usersController.getGuests = async (req, res, next) => {
-    const guests = await User.findAll({ raw: true });
+    const limit = 10;
+    const offset = req.query.page || 1;
+    console.log(req.query.page);
+    const guests = await User.findAll({ 
+        raw: true,
+        limit: limit,
+        offset: (offset-1)*limit,
+        order:[
+            ['id', 'ASC']
+        ]
+    });
     res.send(JSON.stringify(guests));
 }
 
@@ -25,9 +35,13 @@ usersController.unblockUser = (req, res, next) => {
     res.end();
 }
 
-usersController.getUsers = (req, res, next) => {
-    res.render('pages/users/accounts',
-        { title: 'Tài khoản' });
+usersController.getUsers = async (req, res, next) => {
+    const lastPage = Math.ceil (await User.count({ raw: true }) / 10);
+    console.log(lastPage);
+    res.render('pages/users/accounts', {
+         title: 'Tài khoản',
+         lastPage: lastPage
+     });
 }
 
 module.exports = usersController;
