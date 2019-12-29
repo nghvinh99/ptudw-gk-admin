@@ -28,6 +28,14 @@ module.exports = (sequelize, DataTypes) => {
     });
   };
 
+  User.block = function(id, value) {
+    User.update({
+      block: value
+    }, {
+      where: {id : id}
+    });
+  }
+
   User.associate = function (models) {
   };
   

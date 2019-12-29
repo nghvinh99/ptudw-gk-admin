@@ -7,20 +7,18 @@
 </head>
 
 <body id="reportsPage">
-  <div class="" id="home">
+  <div id="home">
     <% include ../../elements/navbar %>
     <div class="container mt-5">
       <div class="row tm-content-row">
         <div class="col-12 tm-block-col">
           <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
-            <h2 class="tm-block-title">List of Accounts</h2>
+            <h2 class="tm-block-title">Tài khoản người dùng</h2>
             <p class="text-white">Loại tài khoản</p>
-            <select class="custom-select">
-              <option value="0">Chọn loại tài khoản</option>
+            <select class="custom-select" id="accountType">
+              <option value="" disabled selected hidden>Chọn loại tài khoản...</option>
+              <option value="0">Khách hàng</option>
               <option value="1">Quản trị viên</option>
-              <option value="2">Biên tập viên</option>
-              <option value="3">Thương nhân</option>
-              <option value="4">Khách hàng</option>
             </select>
             <br>
             <br>
@@ -31,44 +29,11 @@
                   <th scope="col">EMAIL</th>
                   <th scope="col">SỐ ĐIỆN THOẠI</th>
                   <th scope="col">USERNAME</th>
-                  <th scope="col">PASSWORD</th>
+                  <th scope="col">KHÓA TÀI KHOẢN</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody id="userDetail">
                 <tr>
-                  <td class="tm-user-name">Vũ Quỳnh Chi Mai</td>
-                  <td>chimai@gmail.com</td>
-                  <td>0123 456 789</td>
-                  <td>chimai1411</td>
-                  <td>**********</td>
-                </tr>
-                <tr>
-                  <td class="tm-user-name">Hà Huế Trân</td>
-                  <td>huetran@gmail.com</td>
-                  <td>0123 456 987</td>
-                  <td>huetran1101</td>
-                  <td>**********</td>
-                </tr>
-                <tr>
-                  <td class="tm-user-name">Lê Hà An</td>
-                  <td>Haan@gmail.com</td>
-                  <td>0123 654 789</td>
-                  <td>haan1412</td>
-                  <td>**********</td>
-                </tr>
-                <tr>
-                  <td class="tm-user-name">Lê Văn Dương</td>
-                  <td>vanduong@gmail.com</td>
-                  <td>0321 456 789</td>
-                  <td>vanduong5930</td>
-                  <td>**********</td>
-                </tr>
-                <tr>
-                  <td class="tm-user-name">Nguyễn Văn Tuấn</td>
-                  <td>vantuan@gmail.com</td>
-                  <td>0123 432 678</td>
-                  <td>coolng@uboy</td>
-                  <td>**********</td>
                 </tr>
               </tbody>
             </table>

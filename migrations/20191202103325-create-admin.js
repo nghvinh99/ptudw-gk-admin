@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    queryInterface.createTable('Admin', {
+    return queryInterface.createTable('Admin', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -25,14 +25,14 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
-    });
-    return queryInterface.bulkInsert('Admin',[{
+    }).then(() => {
+      return queryInterface.bulkInsert('Admin',[{
         username: 'admin',
         password: '$2a$10$DaVC6NFVHp4O/z45FMJW8e0oB2WRIpSJArymSX6vBHeWA1wI.SkSW', //admin
         createdAt: new Date(),
         updatedAt: new Date()
-      }],
-      {})
+      }]);
+    })
   },
   down: (queryInterface, Sequelize) => {
     return queryInterface.dropTable('Admin');
