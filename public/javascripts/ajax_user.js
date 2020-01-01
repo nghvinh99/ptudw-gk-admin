@@ -1,4 +1,4 @@
-let currentPage = 1;
+let currentUserPage = 1;
 
 function userBlocking(checkbox, id) {
     if (checkbox.checked) {
@@ -37,7 +37,7 @@ function userBlocking(checkbox, id) {
 }
 
 function appendUserList(data) {
-    let count = (currentPage - 1) * 10;
+    let count = (currentUserPage - 1) * 10;
     $('#userDetail').html('<tr></tr>');
     data.forEach((user) => {
         count += 1;
@@ -128,47 +128,49 @@ function enableNextPage() {
 
 $(function () {
     $('#nextUserPage').on('click', function () {
-        currentPage += 1;
+        currentUserPage += 1;
         $.ajax({
             url: '/users/guest',
             type: 'GET',
             dataType: 'json',
             data: {
-                page: currentPage
+                page: currentUserPage
             },
             success: (data) => { appendUserList(data); }
         })
-        if (currentPage == parseInt($('#lastUserPage').attr('value'))) {
+        if (currentUserPage == parseInt($('#lastUserPage').attr('value'))) {
             disableNextPage();
+            enablePrevPage();
         } else {
             enableAllPaginationButton();
         }
     })
     $('#prevUserPage').on('click', function () {
-        currentPage -= 1;
+        currentUserPage -= 1;
         $.ajax({
             url: '/users/guest',
             type: 'GET',
             dataType: 'json',
             data: {
-                page: currentPage
+                page: currentUserPage
             },
             success: (data) => { appendUserList(data); }
         })
-        if (currentPage == 1) {
+        if (currentUserPage == 1) {
             disablePrevPage();
+            enableNextPage();
         } else {
             enableAllPaginationButton();
         }
     })
     $('#firstUserPage').on('click', function () {
-        currentPage = 1;
+        currentUserPage = 1;
         $.ajax({
             url: '/users/guest',
             type: 'GET',
             dataType: 'json',
             data: {
-                page: currentPage
+                page: currentUserPage
             },
             success: (data) => { appendUserList(data); }
         })
@@ -176,13 +178,13 @@ $(function () {
         disablePrevPage();
     })
     $('#lastUserPage').on('click', function () {
-        currentPage = $('#lastUserPage').attr('value');
+        currentUserPage = $('#lastUserPage').attr('value');
         $.ajax({
             url: '/users/guest',
             type: 'GET',
             dataType: 'json',
             data: {
-                page: currentPage
+                page: currentUserPage
             },
             success: (data) => { appendUserList(data); }
         })

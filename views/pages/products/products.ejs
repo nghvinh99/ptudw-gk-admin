@@ -13,11 +13,11 @@
 
       <div class="col-sm-12 col-md-12 col-lg-8 col-xl-8 tm-block-col">
         <div class="tm-bg-primary-dark tm-block tm-block-products">
-          <div class="tm-product-table-container">
+          <!-- <div class="tm-product-table-container"> -->
             <table class="table table-hover tm-table-small tm-product-table">
               <thead>
                 <tr>
-                  <th scope="col">&nbsp;</th>
+                  <th scope="col">STT</th>
                   <th scope="col">TÊN SẢN PHẨM</th>
                   <th scope="col">GIÁ</th>
                   <th scope="col">LƯỢT XEM</th>
@@ -25,46 +25,30 @@
                   <th scope="col">&nbsp;</th>
                 </tr>
               </thead>
-              <tbody>
-                <% products.forEach((product) => { %>
-                <tr>
-                  <th scope="row"></th>
-                  <td onclick="location.href='products/edit/<%= product.id %>'"><%= product.name %></td>
-                  <td onclick="location.href='products/edit/<%= product.id %>'"><%= product.price %></td>
-                  <td onclick="location.href='products/edit/<%= product.id %>'"><%= product.views %></td>
-                  <td onclick="location.href='products/edit/<%= product.id %>'"><%= product.quantity %></td>
-                  <td>
-                    <a href="/products/delete/<%= product.id %>" class="tm-product-delete-link"
-                      onclick="return confirm('Bạn có chắc muốn XÓA sản phẩm <<%= product.name %>>\n Bấm OK để xóa')">
-                      <i class="far fa-trash-alt tm-product-delete-icon"></i>
-                    </a>
-                  </td>
-                </tr>
-                <% }); %>
+              <tbody id="productDetail">
               </tbody>
             </table>
+          <!-- </div> -->
+          <div style="text-align: center; margin-top: 2%;">
+            <button id="firstProductPage" type="button" class="btn btn-outline-light btn-custom">&laquo;</button>
+            <button id="prevProductPage" type="button" class="btn btn-outline-light btn-custom"><</button>
+            <button id="nextProductPage" type="button" class="btn btn-outline-light btn-custom">></button>
+            <button id="lastProductPage" value="<%= lastPage %>" type="button" class="btn btn-outline-light btn-custom">&raquo;</button>
           </div>
-          <!-- table container -->
-          <a href="/products/add" class="btn btn-primary btn-block text-uppercase mb-3">THÊM SẢN PHẨM MỚI</a>
+          <a href="/products/add" style="margin-top: 2%;" class="btn btn-primary btn-block text-uppercase mb-3">THÊM SẢN PHẨM MỚI</a>
         </div>
       </div>
 
       <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 tm-block-col">
         <div class="tm-bg-primary-dark tm-block tm-block-product-categories">
-          <h2 class="tm-block-title">Hãng sản xuất</h2>
+          <h5><select id="filter" style="margin-bottom: 20px;height: auto;" class="custom-select" id="accountType"></h5>
+            <option value="0" selected>Hãng sản xuất</option>
+            <option value="1">Nhóm</option>
+            <option value="2">Loại</option>
+          </select>
           <div class="tm-product-table-container">
             <table class="table tm-table-small tm-product-table">
-              <tbody>
-                <% brand.forEach((brand) => { %>
-                <tr>
-                  <td class="tm-product-name"><%= brand.name %></td>
-                  <td class="text-center">
-                    <a href="#" class="tm-product-delete-link">
-                      <i class="far fa-trash-alt tm-product-delete-icon"></i>
-                    </a>
-                  </td>
-                </tr>
-                <% }); %>
+              <tbody id="filterList">
               </tbody>
             </table>
           </div>
@@ -79,6 +63,8 @@
   <% include ../../elements/footer %>
 
   <% include ../../elements/scripts %>
+
+  <script src="javascripts/ajax_product.js"></script>
 </body>
 
 </html>

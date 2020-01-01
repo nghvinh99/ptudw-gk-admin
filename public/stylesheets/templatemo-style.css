@@ -430,10 +430,10 @@ input[type="checkbox"]:focus {
   box-shadow: none;
 }
 .tm-block-products {
-  min-height: 725px;
+  min-height: 950px;
 }
 .tm-block-product-categories {
-  min-height: 650px;
+  min-height: 550px;
 }
 .tm-product-table-container {
   max-height: 465px;

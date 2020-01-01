@@ -6,7 +6,6 @@ const usersController = {};
 usersController.getGuests = async (req, res, next) => {
     const limit = 10;
     const offset = req.query.page || 1;
-    console.log(req.query.page);
     const guests = await User.findAll({ 
         raw: true,
         limit: limit,
@@ -37,7 +36,6 @@ usersController.unblockUser = (req, res, next) => {
 
 usersController.getUsers = async (req, res, next) => {
     const lastPage = Math.ceil (await User.count({ raw: true }) / 10);
-    console.log(lastPage);
     res.render('pages/users/accounts', {
          title: 'Tài khoản',
          lastPage: lastPage

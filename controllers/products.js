@@ -9,15 +9,41 @@ const cloudinary = require('../config/cloudinary');
 const productsController = {};
 
 productsController.getProducts = async (req, res, next) => {
-    const products = await Product.findAll({ raw: true , order: [['id', 'ASC']]});
-    const brand = await Brand.findAll({ raw: true });
-    const type = await Type.findAll({ raw: true });
-    const group = await Group.findAll({ raw: true });
+    const lastPage = Math.ceil (await Product.count({ raw: true }) / 10);
     res.render('pages/products/products',
         {
             title: 'Sản phẩm',
-            products, brand, type, group
+            lastPage
         });
+}
+
+productsController.getBrand = async (req, res, next) => {
+    const brand = await Brand.findAll({raw: true});
+    res.send(JSON.stringify(brand));
+}
+
+productsController.getType = async (req, res, next) => {
+    const type = await Type.findAll({raw: true});
+    res.send(JSON.stringify(type));
+}
+
+productsController.getGroup = async (req, res, next) => {
+    const group = await Group.findAll({raw: true});
+    res.send(JSON.stringify(group));
+}
+
+productsController.getMoreProducts = async (req, res, next) => {
+    const offset = req.query.page || 1;
+    const limit = 10;
+    const products = await Product.findAll({
+        raw: true,
+        limit: limit,
+        offset: (offset-1)*limit,
+        order:[
+            ['id', 'ASC']
+        ]
+    });
+    res.send(JSON.stringify(products));
 }
 
 productsController.edit = async (req, res, next) => {
