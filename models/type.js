@@ -5,6 +5,17 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     freezeTableName: true
   });
+
+  Type.add = (name, next) => {
+    Type.create({
+      name: name
+    }).then( () => {
+      next(null);
+    }).catch((err) => {
+      next(err)
+    })
+  }
+
   Type.associate = function(models) {
   };
   return Type;

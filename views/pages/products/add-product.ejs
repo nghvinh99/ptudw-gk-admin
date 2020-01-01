@@ -40,7 +40,7 @@
                 <div class="form-group mb-3">
                   <label for="group">Phân nhóm</label>
                   <select class="custom-select tm-select-accounts" id="group" name="group" required>
-                    <option value="" selected>Chọn nhóm</option>
+                    <option value="" hidden selected>Chọn nhóm</option>
                     <% group.forEach((group) => {%>
                     <option value=<%= group.id %>><%= group.name %></option>
                     <% }) %>
@@ -49,7 +49,7 @@
                 <div class="form-group mb-3">
                   <label for="type">Phân loại</label>
                   <select class="custom-select tm-select-accounts" id="type" name="type" required>
-                    <option value="" selected>Chọn loại</option>
+                    <option value="" hidden selected>Chọn loại</option>
                     <% type.forEach((type) => {%>
                     <option value=<%= type.id %>><%= type.name %></option>
                     <% }) %>
@@ -58,7 +58,7 @@
                 <div class="form-group mb-3">
                   <label for="brand">Hãng sản xuất</label>
                   <select class="custom-select tm-select-accounts" id="brand" name="brand" required>
-                    <option value="" selected>Chọn hãng</option>
+                    <option value="" hidden selected>Chọn hãng</option>
                     <% brand.forEach((brand) => {%>
                     <option value=<%= brand.id %>><%= brand.name %></option>
                     <% }) %>

@@ -53,8 +53,19 @@
             </table>
           </div>
           <!-- table container -->
-          <button class="btn btn-primary btn-block text-uppercase mb-3">
-            Thêm loại mới
+          <div class="form-popup" id="myForm">
+            <form id="addCategory" class="form-container" onsubmit="return false;">
+              <h1></h1>
+          
+              <label for="name"><b>Tên</b></label>
+              <input type="text" placeholder="Nhập tên" name="name" required>
+          
+              <button type="submit" class="btn">Thêm</button>
+              <button type="submit" class="btn cancel" onclick="closeForm()">Đóng</button>
+            </form>
+          </div>
+          <button onclick="openForm()" class="btn btn-primary btn-block text-uppercase mb-3">
+            Thêm
           </button>
         </div>
       </div>

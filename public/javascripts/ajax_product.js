@@ -1,11 +1,5 @@
 let currentProductPage = 1;
-
-function enableAllPaginationButton() {
-    $('#prevProductPage').attr("disabled", false);
-    $('#firstProductPage').attr("disabled", false);
-    $('#nextProductPage').attr("disabled", false);
-    $('#lastProductPage').attr("disabled", false);
-}
+let condition = {};
 
 function disablePrevPage() {
     $('#prevProductPage').attr("disabled", true);
@@ -30,7 +24,7 @@ function enableNextPage() {
 function removalConfirm(id) {
     var res = window.confirm("Bạn có chắc muốn XÓA sản phẩm này?\n Bấm OK để xóa")
     if (res) {
-        window.location.href="/products/delete/" + id;
+        window.location.href = "/products/delete/" + id;
     }
 }
 
@@ -46,77 +40,83 @@ function appendProductList(data) {
             <td class="single-product">' + product.price + '</td>\
             <td class="single-product">' + product.views + '</td>\
             <td class="single-product">' + product.quantity + '</td>\
-            <td><a class="tm-product-delete-link" onclick="removalConfirm('+ product.id +')">\
+            <td><a class="tm-product-delete-link" onclick="removalConfirm('+ product.id + ')">\
             <i class="far fa-trash-alt tm-product-delete-icon"></i>\
             </a>\</td>\</tr>'
         )
     })
 }
 
-$(function() {
+$(function () {
     $('#productDetail').ready(function () {
         $.ajax({
             url: '/products/getproducts',
             type: 'GET',
             dataType: 'json',
             data: {
+                condition,
                 page: currentProductPage
             },
             success: (data) => { appendProductList(data); }
         })
         $('#prevProductPage').attr("disabled", true);
-        $('#firstProductPage').attr("disabled", true);    
+        $('#firstProductPage').attr("disabled", true);
     })
-    $(document).on('click', '.single-product', function() {
+    $(document).on('click', '.single-product', function () {
         const id = $(this).parent().attr('value');
-        window.location.href='/products/edit/' + id;
+        window.location.href = '/products/edit/' + id;
     })
 })
 
-$(function() {
-    $('#nextProductPage').on('click', function() {
+$(function () {
+    $('#nextProductPage').on('click', function () {
         currentProductPage += 1;
         $.ajax({
             url: '/products/getproducts',
             type: 'GET',
             dataType: 'json',
             data: {
+                condition,
                 page: currentProductPage
             },
             success: (data) => { appendProductList(data); }
         });
-        if (currentProductPage == parseInt($('#lastProductPage').attr('value'))) {
+        if (currentProductPage >= parseInt($('#lastProductPage').attr('value'))) {
             disableNextPage();
             enablePrevPage();
         } else {
-            enableAllPaginationButton();
+            enablePrevPage();
+            enableNextPage();
         }
     });
-    $('#prevProductPage').on('click', function() {
+    $('#prevProductPage').on('click', function () {
         currentProductPage -= 1;
         $.ajax({
             url: '/products/getproducts',
             type: 'GET',
             dataType: 'json',
             data: {
+                condition,
                 page: currentProductPage
             },
             success: (data) => { appendProductList(data); }
         })
-        if (currentProductPage == 1) {
+        if (currentProductPage <= 1) {
             disablePrevPage();
             enableNextPage();
         } else {
-            enableAllPaginationButton();
+            enablePrevPage();
+            enableNextPage();
         }
     });
-    $('#firstProductPage').on('click', function() {
+    $('#firstProductPage').on('click', function () {
         currentProductPage = 1;
         $.ajax({
             url: '/products/getproducts',
             type: 'GET',
             dataType: 'json',
             data: {
+                condition,
                 page: currentProductPage
             },
             success: (data) => { appendProductList(data); }
@@ -131,6 +131,7 @@ $(function() {
             type: 'GET',
             dataType: 'json',
             data: {
+                condition,
                 page: currentProductPage
             },
             success: (data) => { appendProductList(data); }
@@ -141,10 +142,18 @@ $(function() {
 })
 
 function appendFilter(data) {
-    $('#filterList').html('<tr><tr>');
+    $('#filterList').html(
+        '<tr class="tm-product-name" style="cursor: pointer" value="0">\
+        <td>Tất cả</td>\
+        <td class="text-center"><a href="#" style=";visibility:hidden" class="tm-product-delete-link">\
+        <i class="far fa-trash-alt tm-product-delete-icon"></i>\
+        </a></td>\</tr>'
+    );
     data.forEach((item) => {
         $('#filterList').append(
-            '<tr>\<td class="tm-product-name">'+ item.name +'</td>\
+            '<tr class="tm-product-name" style="cursor: pointer"\
+            value="'+ item.id + '">\
+            <td>'+ item.name + '</td>\
             <td class="text-center">\
             <a href="#" class="tm-product-delete-link">\
             <i class="far fa-trash-alt tm-product-delete-icon"></i>\
@@ -153,8 +162,49 @@ function appendFilter(data) {
     })
 }
 
-$(function() {
-    $('#filter').ready(function() {
+$(function () {
+    $(document).on('click', '.tm-product-name', function () {
+        currentProductPage = 1;
+        const filter = parseInt($('#filter').val());
+        const value = $(this).attr("value");
+        if (filter == 0) condition = { groupId: value };
+        else if (filter == 1) condition = { groupId: value };
+        else if (filter == 2) condition = { typeId: value };
+        if (value == 0) condition = {};
+        $.ajax({
+            url: '/products/countproducts',
+            type: 'GET',
+            dataType: 'json',
+            data: {
+                condition
+            },
+            success: (data) => {
+                $('#lastProductPage').attr('value', data);
+            }
+        })
+        $.ajax({
+            url: '/products/getproducts',
+            type: 'GET',
+            dataType: 'json',
+            data: {
+                condition,
+                page: currentProductPage
+            },
+            success: (data) => {
+                appendProductList(data);
+                disablePrevPage();
+                if (currentProductPage >= parseInt($('#lastProductPage').attr('value'))) {
+                    disableNextPage();
+                } else {
+                    enableNextPage();
+                }
+            }
+        })
+    })
+})
+
+$(function () {
+    $('#filter').ready(function () {
         $.ajax({
             url: '/products/getbrand',
             type: 'GET',
@@ -162,9 +212,8 @@ $(function() {
             success: (data) => { appendFilter(data); }
         })
     })
-    $('#filter').on('change', function() {
+    $('#filter').on('change', function () {
         const filter = parseInt($(this).val());
-        console.log(filter);
         if (filter == 0) {
             $.ajax({
                 url: '/products/getbrand',
@@ -189,3 +238,54 @@ $(function() {
         }
     })
 })
+
+$(function () {
+    $('#addCategory').on('submit', function (e) {
+        const value = ($(this).serializeArray());
+        const name = value[0].value;
+        const filter = parseInt($('#filter').val());
+        if (filter == 0) {
+            $.ajax({
+                url: '/products/addbrand',
+                type: 'POST',
+                data: {
+                    name
+                },
+                success: (err) => {
+                    if (err) alert("Bị trùng rồi bạn hiền");
+                }
+            })
+        } else if (filter == 1) {
+            $.ajax({
+                url: '/products/addgroup',
+                type: 'POST',
+                data: {
+                    name
+                },
+                success: (err) => {
+                    if (err) alert("Bị trùng rồi bạn hiền");
+                }
+            })
+        } else if (filter == 2) {
+            $.ajax({
+                url: '/products/addtype',
+                type: 'POST',
+                data: {
+                    name
+                },
+                success: (err) => {
+                    if (err) alert("Bị trùng rồi bạn hiền");
+                }
+            })
+        }
+        e.preventDefault();
+    })
+})
+
+function openForm() {
+    document.getElementById("myForm").style.display = "block";
+}
+
+function closeForm() {
+    document.getElementById("myForm").style.display = "none";
+}

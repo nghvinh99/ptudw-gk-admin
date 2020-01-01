@@ -8,7 +8,7 @@ const cloudinary = require('../config/cloudinary');
 
 const productsController = {};
 
-productsController.getProducts = async (req, res, next) => {
+productsController.getIndex = async (req, res, next) => {
     const lastPage = Math.ceil (await Product.count({ raw: true }) / 10);
     res.render('pages/products/products',
         {
@@ -22,9 +22,31 @@ productsController.getBrand = async (req, res, next) => {
     res.send(JSON.stringify(brand));
 }
 
+productsController.addBrand = (req, res, next) => {
+    const name = req.body.name;
+    Brand.add(name, (err) => {
+        if (err) { 
+            res.send(err);
+        } else {
+            res.end();
+        }
+    });
+}
+
 productsController.getType = async (req, res, next) => {
     const type = await Type.findAll({raw: true});
     res.send(JSON.stringify(type));
+}
+
+productsController.addType = (req, res, next) => {
+    const name = req.body.name;
+    Type.add(name, (err) => {
+        if (err) { 
+            res.send(err);
+        } else {
+            res.end();
+        }
+    });
 }
 
 productsController.getGroup = async (req, res, next) => {
@@ -32,11 +54,24 @@ productsController.getGroup = async (req, res, next) => {
     res.send(JSON.stringify(group));
 }
 
-productsController.getMoreProducts = async (req, res, next) => {
+productsController.addGroup = (req, res, next) => {
+    const name = req.body.name;
+    Group.add(name, (err) => {
+        if (err) { 
+            res.send(err);
+        } else {
+            res.end();
+        }
+    });
+}
+
+productsController.getProducts = async (req, res, next) => {
     const offset = req.query.page || 1;
+    const condition = req.query.condition || {};
     const limit = 10;
     const products = await Product.findAll({
         raw: true,
+        where: condition,
         limit: limit,
         offset: (offset-1)*limit,
         order:[
@@ -44,6 +79,12 @@ productsController.getMoreProducts = async (req, res, next) => {
         ]
     });
     res.send(JSON.stringify(products));
+}
+
+productsController.countProducts = async (req, res, next) => {
+    const condition = req.query.condition || {};
+    const count = Math.ceil (await Product.count({ where: condition}) / 10);
+    res.send(JSON.stringify(count));
 }
 
 productsController.edit = async (req, res, next) => {
