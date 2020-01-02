@@ -24,13 +24,17 @@ productsController.getBrand = async (req, res, next) => {
 
 productsController.addBrand = (req, res, next) => {
     const name = req.body.name;
-    Brand.add(name, (err) => {
-        if (err) { 
-            res.send(err);
-        } else {
-            res.end();
-        }
+    Brand.add(name, (err, brand) => {
+        res.send({err, brand});
     });
+}
+
+productsController.removeBrand = (req, res, next) => {
+    const id = req.body.id;
+    Brand.remove(id, (err, brand) => {
+        console.log(err);
+        res.send({err, brand})
+    })
 }
 
 productsController.getType = async (req, res, next) => {
@@ -40,13 +44,16 @@ productsController.getType = async (req, res, next) => {
 
 productsController.addType = (req, res, next) => {
     const name = req.body.name;
-    Type.add(name, (err) => {
-        if (err) { 
-            res.send(err);
-        } else {
-            res.end();
-        }
+    Type.add(name, (err, type) => {
+        res.send({err, type});
     });
+}
+
+productsController.removeType = (req, res, next) => {
+    const id = req.body.id;
+    Type.remove(id, (err, type) => {
+        res.send({err, type})
+    })
 }
 
 productsController.getGroup = async (req, res, next) => {
@@ -56,13 +63,16 @@ productsController.getGroup = async (req, res, next) => {
 
 productsController.addGroup = (req, res, next) => {
     const name = req.body.name;
-    Group.add(name, (err) => {
-        if (err) { 
-            res.send(err);
-        } else {
-            res.end();
-        }
+    Group.add(name, (err, group) => {
+        res.send({err, group});
     });
+}
+
+productsController.removeGroup = (req, res, next) => {
+    const id = req.body.id;
+    Group.remove(id, (err, group) => {
+        res.send({err, group})
+    })
 }
 
 productsController.getProducts = async (req, res, next) => {

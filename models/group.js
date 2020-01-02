@@ -9,10 +9,20 @@ module.exports = (sequelize, DataTypes) => {
   Group.add = (name, next) => {
     Group.create({
       name: name
-    }).then( () => {
-      next(null);
+    }).then( (res) => {
+      next(null, res);
     }).catch((err) => {
-      next(err)
+      next(err, null)
+    })
+  }
+
+  Group.remove = (id, next) => {
+    Group.destroy({
+      where: {id:id}
+    }).then((res) => {
+      next(null, res);
+    }).catch((err) => {
+      next(err, null);
     })
   }
 

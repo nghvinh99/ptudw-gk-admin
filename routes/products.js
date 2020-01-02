@@ -18,9 +18,15 @@ router.get('/countproducts', products.countProducts);
 
 router.post('/addbrand', products.addBrand);
 
+router.post('/removebrand', products.removeBrand);
+
 router.post('/addgroup', products.addGroup);
 
+router.post('/removegroup', products.removeGroup);
+
 router.post('/addtype', products.addType);
+
+router.post('/removetype', products.removeType);
 
 router.post('/edit/:id', products.editPost);
 

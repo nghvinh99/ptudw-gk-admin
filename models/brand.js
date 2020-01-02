@@ -9,10 +9,20 @@ module.exports = (sequelize, DataTypes) => {
   Brand.add = (name, next) => {
     Brand.create({
       name: name
-    }).then( () => {
-      next(null);
+    }).then( (res) => {
+      next(null, res);
     }).catch((err) => {
-      next(err)
+      next(err, null)
+    })
+  }
+
+  Brand.remove = (id, next) => {
+    Brand.destroy({
+      where: {id:id}
+    }).then((res) => {
+      next(null, res);
+    }).catch((err) => {
+      next(err, null);
     })
   }
 

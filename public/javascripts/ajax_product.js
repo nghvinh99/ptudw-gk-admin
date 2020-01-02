@@ -141,6 +141,60 @@ $(function () {
     });
 })
 
+function removeFilter(id) {
+    $('#tm-product-name-'+id).remove();
+}
+
+function categoryRemoval(id) {
+    const filter = parseInt($('#filter').val());
+    if (filter == 0) {
+        $.ajax({
+            url: '/products/removebrand',
+            type: 'POST',
+            data: {id},
+            success: (data) => { 
+                if (data.err) {
+                    alert(data.err);
+                } else removeFilter(id); 
+            }
+        })
+    } else if (filter == 1) {
+        $.ajax({
+            url: '/products/removegroup',
+            type: 'POST',
+            data: {id},
+            success: (data) => { 
+                if (data.err) {
+                    alert(data.err);
+                } else removeFilter(id); 
+            }
+        })
+    } else if (filter == 2) {
+        $.ajax({
+            url: '/products/removetype',
+            type: 'POST',
+            data: {id},
+            success: (data) => { 
+                if (data.err) {
+                    alert(data.err);
+                } else removeFilter(id); 
+            }
+        })
+    }
+}
+
+function appendOneFilter(data) {
+    $('#filterList').append(
+        '<tr id="tm-product-name-'+ data.id +'" class="tm-product-name" style="cursor: pointer"\
+        value="'+ data.id + '">\
+        <td>'+ data.name + '</td>\
+        <td class="text-center">\
+        <a class="tm-product-delete-link" onclick="categoryRemoval('+ data.id +')">\
+        <i class="far fa-trash-alt tm-product-delete-icon"></i>\
+        </a>\</td>\</tr>'
+    );
+}
+
 function appendFilter(data) {
     $('#filterList').html(
         '<tr class="tm-product-name" style="cursor: pointer" value="0">\
@@ -150,15 +204,7 @@ function appendFilter(data) {
         </a></td>\</tr>'
     );
     data.forEach((item) => {
-        $('#filterList').append(
-            '<tr class="tm-product-name" style="cursor: pointer"\
-            value="'+ item.id + '">\
-            <td>'+ item.name + '</td>\
-            <td class="text-center">\
-            <a href="#" class="tm-product-delete-link">\
-            <i class="far fa-trash-alt tm-product-delete-icon"></i>\
-            </a>\</td>\</tr>'
-        );
+        appendOneFilter(item);
     })
 }
 
@@ -167,7 +213,7 @@ $(function () {
         currentProductPage = 1;
         const filter = parseInt($('#filter').val());
         const value = $(this).attr("value");
-        if (filter == 0) condition = { groupId: value };
+        if (filter == 0) condition = { brandId: value };
         else if (filter == 1) condition = { groupId: value };
         else if (filter == 2) condition = { typeId: value };
         if (value == 0) condition = {};
@@ -251,8 +297,12 @@ $(function () {
                 data: {
                     name
                 },
-                success: (err) => {
-                    if (err) alert("Bị trùng rồi bạn hiền");
+                success: (data) => {
+                    if (data.err) alert("Tên đã tồn tại");
+                    else {
+                        const res = data.brand;
+                        appendOneFilter(res);
+                    }
                 }
             })
         } else if (filter == 1) {
@@ -262,8 +312,12 @@ $(function () {
                 data: {
                     name
                 },
-                success: (err) => {
-                    if (err) alert("Bị trùng rồi bạn hiền");
+                success: (data) => {
+                    if (data.err) alert("Tên đã tồn tại");
+                    else {
+                        const res = data.group;
+                        appendOneFilter(res);
+                    }
                 }
             })
         } else if (filter == 2) {
@@ -273,8 +327,12 @@ $(function () {
                 data: {
                     name
                 },
-                success: (err) => {
-                    if (err) alert("Bị trùng rồi bạn hiền");
+                success: (data) => {
+                    if (data.err) alert("Tên đã tồn tại");
+                    else {
+                        const res = data.type;
+                        appendOneFilter(res);
+                    }
                 }
             })
         }
