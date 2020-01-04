@@ -20,7 +20,7 @@ module.exports = {
       quantity: {
         type: Sequelize.INTEGER
       },
-      views: {
+      sells: {
         type: Sequelize.INTEGER
       },
       brandId: {

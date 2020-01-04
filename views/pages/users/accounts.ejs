@@ -6,8 +6,8 @@
   <% include ../../elements/meta %>
 </head>
 
-<body id="reportsPage">
-  <div id="home">
+<body>
+  <div>
     <% include ../../elements/navbar %>
     <div class="container mt-5">
       <div class="row tm-content-row">
@@ -37,11 +37,12 @@
                 </tr>
               </tbody>
             </table>
-            <div style="text-align: center;" >
+            <div style="text-align: center;">
               <button id="firstUserPage" type="button" class="btn btn-outline-light btn-custom">&laquo;</button>
-              <button id="prevUserPage" type="button" class="btn btn-outline-light btn-custom"><</button>
+              <button id="prevUserPage" type="button" class="btn btn-outline-light btn-custom"><</button> 
               <button id="nextUserPage" type="button" class="btn btn-outline-light btn-custom">></button>
               <button id="lastUserPage" value="<%= lastPage %>" type="button" class="btn btn-outline-light btn-custom">&raquo;</button>
+            </div>
           </div>
         </div>
       </div>
@@ -51,40 +52,37 @@
           <div class="tm-bg-primary-dark tm-block tm-block-avatar">
             <h2 class="tm-block-title">Ảnh đại diện</h2>
             <div class="tm-avatar-container">
-              <img src="/images/avatar.png" alt="Avatar" class="tm-avatar img-fluid mb-4" />
-              <a href="#" class="tm-avatar-delete-link">
-                <i class="far fa-trash-alt tm-product-delete-icon"></i>
-              </a>
+              <img id="avatar" src=""  class="tm-avatar img-fluid mb-4" />
             </div>
           </div>
         </div>
         <div class="tm-block-col tm-col-account-settings">
           <div class="tm-bg-primary-dark tm-block tm-block-settings">
             <h2 class="tm-block-title">Thông tin tài khoản</h2>
-            <form action="" class="tm-signup-form row">
+            <form class="tm-signup-form row">
               <div class="form-group col-lg-6">
-                <label for="name">Tên khách hàng</label>
-                <span id="name" class="form-control validate">
+                <label for="name">Tên</label>
+                <span id="name" class="form-control validate"></span>
               </div>
               <div class="form-group col-lg-6">
                 <label for="DoB">Ngày sinh</label>
-                <span id="DoB" class="form-control validate">
+                <span id="DoB" class="form-control validate"></span>
               </div>
               <div class="form-group col-lg-6">
                 <label for="email">Email</label>
-                <span id="email" class="form-control validate">
+                <span id="email" class="form-control validate"></span>
               </div>
               <div class="form-group col-lg-6">
                 <label for="phone">Số điện thoại</label>
-                <span id="phone" class="form-control validate">
+                <span id="phone" class="form-control validate"></span>
               </div>
               <div class="form-group col-lg-6">
                 <label for="gender">Giới tính</label>
-                <span id="gender" class="form-control validate">
+                <span id="gender" class="form-control validate"></span>
               </div>
               <div class="form-group col-lg-6">
                 <label for="account">Tài khoản</label>
-                <span id="account" class="form-control validate">
+                <span id="account" class="form-control validate"></span>
               </div>
             </form>
           </div>

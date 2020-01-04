@@ -13,4 +13,8 @@ router.post('/block', users.blockUser);
 
 router.post('/unblock', users.unblockUser);
 
+router.get('/info', users.getUserInfo);
+
+router.get('/admin/info', users.getAdminInfo);
+
 module.exports = router;

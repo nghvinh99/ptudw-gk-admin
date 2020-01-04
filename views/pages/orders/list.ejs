@@ -6,155 +6,50 @@
     <% include ../../elements/meta %>
 </head>
 
-<body id="reportsPage">
-    <div class="" id="home">
+<body>
+    <div>
         <% include ../../elements/navbar %>
         <div class="container">
             <table class="table">
                 <thead>
                     <tr>
                         <th scope="col">MÃ ĐƠN HÀNG</th>
+                        <th scope="col">TÀI KHOẢN</th>
+                        <th scope="col">TÊN KHÁCH ĐẶT HÀNG</th>
+                        <th scope="col">ĐỊA CHỈ</th>
+                        <th scope="col">NGÀY ĐẶT</th>
                         <th scope="col">TRẠNG THÁI</th>
-                        <th scope="col">CHỊU TRÁCH NHIỆM</th>
-                        <th scope="col">ĐỊA ĐIỂM</th>
-                        <th scope="col">KHOẢNG CÁCH</th>
-                        <th scope="col">THỜI GIAN BẮT ĐẦU</th>
-                        <th scope="col">THỜI GIAN ĐẾN DỰ KIẾN</th>
                     </tr>
                 </thead>
                 <tbody>
+                    <% const weekDay = ['Chủ nhật', 'Thứ hai', 'Thứ ba', 'Thứ tư', 'Thứ năm', 'Thứ sáu', 'Thứ bảy'] %>
+                    <% for(let i=0;i<orders.length;i++) { %>
+                    <% const date = new Date(orders[i].createdAt); %>
+                    <% const week = date.getDay(); %>
+                    <% const day = date.getDate(); %>
+                    <% const month = date.getMonth() + 1; %>
+                    <% const year = date.getFullYear(); %>
                     <tr>
-                        <th scope="row"><b>#122349</b></th>
-                        <td>
-                            <div class="tm-status-circle moving">
-                            </div>Đang vận chuyển
+                        <th scope="row"><b>#<%= orders[i].id %></b></th>
+                        <td><b><%= usernames[i].username %></b></td>
+                        <td><b><%= orders[i].name %></b></td>
+                        <td><b><%= orders[i].address %></b></td>
+                        <td><b><%= weekDay[week]%>, <%= day %> tháng <%= month %>, <%= year %></b></td>
+                        <td id=<%= orders[i].id %>>
+                            <select class="custom-select">
+                                <option value="Pending" <%= orders[i].state == "Pending" ? 'selected' : ''%>>
+                                    Chưa giao
+                                </option>
+                                <option value="Delivering" <%= orders[i].state == "Delivering" ? 'selected' : ''%>>
+                                    Đang giao
+                                </option>
+                                <option value="Delivered" <%= orders[i].state == "Delivered" ? 'selected' : ''%>>
+                                    Đã giao
+                                </option>
+                            </select>
                         </td>
-                        <td><b>Nguyễn Thanh Tâm</b></td>
-                        <td><b>Quận 1, TPHCM</b></td>
-                        <td><b>3 km</b></td>
-                        <td>16:00, 12/11/2019</td>
-                        <td>08:00, 18/11/2019</td>
                     </tr>
-                    <tr>
-                        <th scope="row"><b>#122348</b></th>
-                        <td>
-                            <div class="tm-status-circle pending">
-                            </div>Đang duyệt
-                        </td>
-                        <td><b>Trần Thế Viễn</b></td>
-                        <td><b>Quận 2, TPHCM</b></td>
-                        <td><b>12 km</b></td>
-                        <td>11:00, 10/11/2019</td>
-                        <td>04:00, 14/11/2019</td>
-                    </tr>
-                    <tr>
-                        <th scope="row"><b>#122347</b></th>
-                        <td>
-                            <div class="tm-status-circle cancelled">
-                            </div>Đã hủy
-                        </td>
-                        <td><b>Phan Đức Tài</b></td>
-                        <td><b>Quận 4, TPHCM</b></td>
-                        <td><b>4 km</b></td>
-                        <td>12:00, 22/11/2019</td>
-                        <td>06:00, 28/11/2019</td>
-                    </tr>
-                    <tr>
-                        <th scope="row"><b>#122346</b></th>
-                        <td>
-                            <div class="tm-status-circle moving">
-                            </div>Đang vận chuyển
-                        </td>
-                        <td><b>Lê Vũ Bình</b></td>
-                        <td><b>Quận 8, TPHCM</b></td>
-                        <td><b>8 km</b></td>
-                        <td>15:00, 10/11/2019</td>
-                        <td>09:00, 14/11/2019</td>
-                    </tr>
-                    <tr>
-                        <th scope="row"><b>#122345</b></th>
-                        <td>
-                            <div class="tm-status-circle pending">
-                            </div>Đang duyệt
-                        </td>
-                        <td><b>Bùi Văn Thiên</b></td>
-                        <td><b>Quận 3, TPHCM</b></td>
-                        <td><b>15 km</b></td>
-                        <td>15:00, 11/11/2019</td>
-                        <td>09:00, 17/11/2019</td>
-                    </tr>
-                    <tr>
-                        <th scope="row"><b>#122344</b></th>
-                        <td>
-                            <div class="tm-status-circle pending">
-                            </div>Đang duyệt
-                        </td>
-                        <td><b>Nguyễn Long Quốc</b></td>
-                        <td><b>Quận 5, TPHCM</b></td>
-                        <td><b>7 km</b></td>
-                        <td>18:00, 12/10/2019</td>
-                        <td>06:00, 18/10/2019</td>
-                    </tr>
-                    <tr>
-                        <th scope="row"><b>#122343</b></th>
-                        <td>
-                            <div class="tm-status-circle moving">
-                            </div>Đang vận chuyển
-                        </td>
-                        <td><b>Vương Phong Quân</b></td>
-                        <td><b>Quận 9, TPHCM</b></td>
-                        <td><b>12 km</b></td>
-                        <td>12:00, 10/10/2019</td>
-                        <td>08:00, 18/10/2019</td>
-                    </tr>
-                    <tr>
-                        <th scope="row"><b>#122342</b></th>
-                        <td>
-                            <div class="tm-status-circle moving">
-                            </div>Đang vận chuyển
-                        </td>
-                        <td><b>Phan Lâm Ba</b></td>
-                        <td><b>Quận 2, TPHCM</b></td>
-                        <td><b>2 km</b></td>
-                        <td>15:30, 06/10/2019</td>
-                        <td>09:30, 16/10/2019</td>
-                    </tr>
-                    <tr>
-                        <th scope="row"><b>#122341</b></th>
-                        <td>
-                            <div class="tm-status-circle moving">
-                            </div>Đang vận chuyển
-                        </td>
-                        <td><b>Lê Nhật Tân</b></td>
-                        <td><b>Quận 6, TPHCM</b></td>
-                        <td><b>3 km</b></td>
-                        <td>11:00, 10/10/2019</td>
-                        <td>03:00, 14/10/2019</td>
-                    </tr>
-                    <tr>
-                        <th scope="row"><b>#122340</b></th>
-                        <td>
-                            <div class="tm-status-circle cancelled">
-                            </div>Đã hủy
-                        </td>
-                        <td><b>Lê Tấn Đạt</b></td>
-                        <td><b>Quận Bình Thạnh, TPHCM</b></td>
-                        <td><b>21 km</b></td>
-                        <td>17:30, 12/10/2019</td>
-                        <td>08:30, 22/10/2019</td>
-                    </tr>
-                    <tr>
-                        <th scope="row"><b>#122339</b></th>
-                        <td>
-                            <div class="tm-status-circle moving">
-                            </div>Đang vận chuyển
-                        </td>
-                        <td><b>La Phát Đạt</b></td>
-                        <td><b>Quận 12, TPHCM</b></td>
-                        <td><b>15 km</b></td>
-                        <td>15:00, 12/10/2019</td>
-                        <td>09:20, 26/10/2019</td>
-                    </tr>
+                    <% } %>
                 </tbody>
             </table>
         </div>
@@ -162,6 +57,8 @@
     </div>
 
     <% include ../../elements/scripts %>
+
+    <script src="javascripts/ajax_order.js"></script>
 </body>
 
 </html>

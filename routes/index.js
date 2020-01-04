@@ -11,4 +11,8 @@ router.get('/logout', index.logout);
 
 router.get('/', index.authenticationCheck, index.dashboard);
 
+router.get('/ordersstate', index.ordersState);
+
+router.get('/todayincome', index.todayIncome);
+
 module.exports = router;

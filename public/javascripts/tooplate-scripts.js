@@ -130,53 +130,6 @@ function drawBarChart() {
   }
 }
 
-function drawPieChart() {
-  if ($("#pieChart").length) {
-    var chartHeight = 300;
-
-    $("#pieChartContainer").css("height", chartHeight + "px");
-
-    ctxPie = document.getElementById("pieChart").getContext("2d");
-
-    optionsPie = {
-      responsive: true,
-      maintainAspectRatio: false,
-      layout: {
-        padding: {
-          left: 10,
-          right: 10,
-          top: 10,
-          bottom: 10
-        }
-      },
-      legend: {
-        position: "top"
-      }
-    };
-
-    configPie = {
-      type: "pie",
-      data: {
-        datasets: [
-          {
-            data: [6, 3, 2],
-            backgroundColor: [ "#1AFF1A" , "#FFA31A" , "#F7604D" ],
-            label: "Storage"
-          }
-        ],
-        labels: [
-          "Đang vận chuyển (6)",
-          "Chờ duyệt (3)",
-          "Hủy (2)"
-        ]
-      },
-      options: optionsPie
-    };
-
-    pieChart = new Chart(ctxPie, configPie);
-  }
-}
-
 function updateLineChart() {
   if (lineChart) {
     lineChart.options = optionsLine;

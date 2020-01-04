@@ -3,7 +3,12 @@ const bcrypt = require('bcryptjs');
 module.exports = (sequelize, DataTypes) => {
   const Admin = sequelize.define('Admin', {
     username: DataTypes.STRING,
-    password: DataTypes.STRING
+    password: DataTypes.STRING,
+    name: DataTypes.STRING,
+    DoB: DataTypes.DATE,
+    email: DataTypes.STRING,
+    phone: DataTypes.STRING,
+    gender: DataTypes.BOOLEAN,
   }, {
     freezeTableName: true
   });

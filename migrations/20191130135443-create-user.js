@@ -20,14 +20,23 @@ module.exports = {
       block: {
         type: Sequelize.BOOLEAN
       },
-      userdetail: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'UserDetail',
-          key: 'id',
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
+      name: {
+        type: Sequelize.STRING
+      },
+      DoB: {
+        type: Sequelize.STRING
+      },
+      email: {
+        type: Sequelize.STRING
+      },
+      phone: {
+        type: Sequelize.STRING
+      },
+      gender: {
+        type: Sequelize.BOOLEAN
+      },
+      avatar: {
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,

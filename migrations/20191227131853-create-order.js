@@ -18,15 +18,32 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'NO ACTION',
       },
-      order: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'OrderDetail',
-          key: 'id',
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'NO ACTION',
+      detail: {
+        type: Sequelize.TEXT
+      },
+      state: {
+        type: Sequelize.STRING
+      },
+      name: {
+        type: Sequelize.STRING
+      },
+      phone: {
+        type: Sequelize.STRING
+      },
+      email: {
+        type: Sequelize.STRING
+      },
+      address: {
+        type: Sequelize.STRING
+      },
+      note: {
+        type: Sequelize.STRING
+      },
+      COD: {
+        type: Sequelize.BOOLEAN
+      },
+      cost: {
+        type: Sequelize.BIGINT
       },
       createdAt: {
         allowNull: false,
@@ -39,6 +56,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Orders');
+    return queryInterface.dropTable('Order');
   }
 };

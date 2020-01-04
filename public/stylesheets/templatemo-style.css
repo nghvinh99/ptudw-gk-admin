@@ -157,8 +157,7 @@ button:focus {
 }
 .tm-content-row {
   justify-content: space-between;
-  margin-left: -20px;
-  margin-right: -20px;
+  margin: auto;
 }
 .tm-col {
   padding-left: 20px;

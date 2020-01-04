@@ -42,4 +42,22 @@ usersController.getUsers = async (req, res, next) => {
      });
 }
 
+usersController.getUserInfo = async (req, res, next) => {
+    const id = req.query.id;
+    const user = await User.findOne({
+        raw: true,
+        where: {id: id}
+    });
+    res.send(JSON.stringify(user));
+}
+
+usersController.getAdminInfo = async (req, res, next) => {
+    const id = req.query.id;
+    const user = await Admin.findOne({
+        raw: true,
+        where: {id: id}
+    });
+    res.send(JSON.stringify(user));
+}
+
 module.exports = usersController;

@@ -36,76 +36,6 @@ function userBlocking(checkbox, id) {
     }
 }
 
-function appendUserList(data) {
-    let count = (currentUserPage - 1) * 10;
-    $('#userDetail').html('<tr></tr>');
-    data.forEach((user) => {
-        count += 1;
-        let block = '';
-        if (user.block) block = 'checked';
-        $('#userDetail').append(
-            '<tr><td>' + count + '</td>\
-            <td class="tm-user-name">TODO</td>\
-            <td>TODO</td>\
-            <td>TODO</td>\
-            <td>'+ user.username + '</td>\
-            <td><input onchange="javascript:userBlocking(this,'+ user.id + ');" type="checkbox" style="left: 20%;" ' + block + '></td></tr>'
-        )
-    })
-}
-
-$(function () {
-    $('#userDetail').ready(function () {
-        $.ajax({
-            url: '/users/guest',
-            type: 'GET',
-            dataType: 'json',
-            success: (data) => { appendUserList(data); }
-        })
-        $('#prevUserPage').attr("disabled", true);
-        $('#firstUserPage').attr("disabled", true);
-    })
-    $('#accountType').on('change', function () {
-        const val = parseInt($(this).val());
-        if (val == 0) {
-            $.ajax({
-                url: '/users/guest',
-                type: 'GET',
-                dataType: 'json',
-                success: (data) => { appendUserList(data); }
-            })
-        } else if (val == 1) {
-            $.ajax({
-                url: '/users/admin',
-                type: 'GET',
-                dataType: 'json',
-                success: (data) => {
-                    $('#userDetail').html('<tr></tr>');
-                    let count = 0;
-                    data.forEach((user) => {
-                        count += 1;
-                        $('#userDetail').append(
-                            '<tr><td>' + count + '</td>\
-                            <td class="tm-user-name">TODO</td>\
-                            <td>TODO</td>\
-                            <td>TODO</td>\
-                            <td>'+ user.username + '</td>\
-                            <td></td></tr>'
-                        )
-                    })
-                }
-            })
-        }
-    });
-});
-
-function enableAllPaginationButton() {
-    $('#prevUserPage').attr("disabled", false);
-    $('#firstUserPage').attr("disabled", false);
-    $('#nextUserPage').attr("disabled", false);
-    $('#lastUserPage').attr("disabled", false);
-}
-
 function disablePrevPage() {
     $('#prevUserPage').attr("disabled", true);
     $('#firstUserPage').attr("disabled", true);
@@ -126,6 +56,84 @@ function enableNextPage() {
     $('#lastUserPage').attr("disabled", false);
 }
 
+function appendUserList(data) {
+    let count = (currentUserPage - 1) * 10;
+    $('#userDetail').html('<tr></tr>');
+    data.forEach((user) => {
+        count += 1;
+        let block = '';
+        if (user.block) block = 'checked';
+        $('#userDetail').append(
+            '<tr class="tm-user-name" value="'+ user.id +'" style="cursor: pointer">\
+            <td>' + count + '</td>\
+            <td>'+ user.name +'</td>\
+            <td>'+ user.email +'</td>\
+            <td>'+ user.phone +'</td>\
+            <td>'+ user.username + '</td>\
+            <td><input onchange="javascript:userBlocking(this,'+ user.id + ');" type="checkbox" style="left: 20%;" ' + block + '></td>\
+            </tr>'
+        )
+    })
+}
+
+$(function () {
+    $('#userDetail').ready(function () {
+        $.ajax({
+            url: '/users/guest',
+            type: 'GET',
+            dataType: 'json',
+            success: (data) => { appendUserList(data); }
+        })
+        disablePrevPage();
+        if (currentUserPage >= parseInt($('#lastUserPage').attr('value'))) {
+            disableNextPage();
+        } else {
+            enableNextPage();
+        }
+    })
+    $('#accountType').on('change', function () {
+        const val = parseInt($(this).val());
+        if (val == 0) {
+            $.ajax({
+                url: '/users/guest',
+                type: 'GET',
+                dataType: 'json',
+                success: (data) => { appendUserList(data); }
+            });
+            disablePrevPage();
+            if (currentUserPage >= parseInt($('#lastUserPage').attr('value'))) {
+                disableNextPage();
+            } else {
+                enableNextPage();
+            }
+        } else if (val == 1) {
+            $.ajax({
+                url: '/users/admin',
+                type: 'GET',
+                dataType: 'json',
+                success: (data) => {
+                    $('#userDetail').html('<tr></tr>');
+                    let count = 0;
+                    data.forEach((user) => {
+                        count += 1;
+                        $('#userDetail').append(
+                            '<tr class="tm-user-name" value="'+ user.id +'" style="cursor: pointer">\
+                            <td>' + count + '</td>\
+                            <td>'+ user.name +'</td>\
+                            <td>'+ user.email +'</td>\
+                            <td>'+ user.phone +'</td>\
+                            <td>'+ user.username + '</td>\
+                            <td></td></tr>'
+                        )
+                    })
+                }
+            });
+            disableNextPage();
+            disablePrevPage();
+        }
+    });
+});
+
 $(function () {
     $('#nextUserPage').on('click', function () {
         currentUserPage += 1;
@@ -142,7 +150,8 @@ $(function () {
             disableNextPage();
             enablePrevPage();
         } else {
-            enableAllPaginationButton();
+            enableNextPage();
+            enablePrevPage();
         }
     })
     $('#prevUserPage').on('click', function () {
@@ -160,7 +169,8 @@ $(function () {
             disablePrevPage();
             enableNextPage();
         } else {
-            enableAllPaginationButton();
+            enableNextPage();
+            enablePrevPage();
         }
     })
     $('#firstUserPage').on('click', function () {
@@ -190,5 +200,59 @@ $(function () {
         })
         enablePrevPage();
         disableNextPage();
+    })
+});
+
+function fillUserInfo(data) {
+    $('#name').html(data.name);
+    const date = new Date(data.DoB);
+    if (date instanceof Date && !isNaN(date)) {
+        const day = date.getDate();
+        const month = date.getMonth() + 1;
+        const year = date.getFullYear();
+        $('#DoB').html(day + ' tháng ' + month + ', ' + year);
+    } else {
+        $('#DoB').html('');
+    }
+    $('#email').html(data.email);
+    if (data.gender){
+        $('#gender').html("Nam");
+    } else {
+        $('#gender').html("Nữ");
+    }
+    $('#phone').html(data.phone);
+    $('#account').html(data.username);
+    if (data.avatar) {
+        $('#avatar').attr('src', data.avatar);
+    } else {
+        $('#avatar').attr('src', '');
+    }
+}
+
+$(function() {
+    $(document).on('click', '.tm-user-name', function (){
+        const id = parseInt($(this).attr('value'));
+        const val = parseInt($('#accountType').val());
+        if (val == 0) {
+            $.ajax({
+                url: '/users/info',
+                type: 'GET',
+                dataType: 'json',
+                data: {id},
+                success: (data) => {
+                    fillUserInfo(data);
+                 }
+            })
+        } else {
+            $.ajax({
+                url: '/users/admin/info',
+                type: 'GET',
+                dataType: 'json',
+                data: {id},
+                success: (data) => {
+                    fillUserInfo(data);
+                 }
+            })
+        }
     })
 })
