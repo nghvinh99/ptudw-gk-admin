@@ -39,17 +39,23 @@
                             <table class="table table-hover tm-table-small tm-product-table">
                                 <thead>
                                     <tr>
+                                        <th scope="col">TOP</th>
                                         <th scope="col">TÊN SẢN PHẨM</th>
                                         <th scope="col">ĐÃ BÁN</th>
                                         <th scope="col">TỒN KHO</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td class="tm-product-name">Áo khoác jean</td>
-                                        <td>100</td>
-                                        <td>25</td>
+                                    <%  let count = 0; %>
+                                    <% top10.forEach((item) => { %>
+                                    <% count += 1; %>
+                                    <a href=""></a><tr style="cursor:pointer;" onclick="location.href='/products/edit/<%= item.id %>'">
+                                        <td><%= count %></td>
+                                        <td class="tm-product-name"><%= item.name %></td>
+                                        <td><%= item.sells %></td>
+                                        <td><%= item.quantity %></td>
                                     </tr>
+                                    <% }) %>
                                 </tbody>
                             </table>
                         </div>
@@ -82,6 +88,7 @@
     <% include elements/scripts %>
     <script src="javascripts/tooplate-scripts.js"></script>
     <script src="javascripts/ajax_index.js"></script>
+    <script src="javascripts/ajax_report.js"></script>
 </body>
 
 </html>

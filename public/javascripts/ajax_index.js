@@ -39,7 +39,7 @@ $(function () {
                         datasets: [
                             {
                                 data: [orders.Pending, orders.Delivering, orders.Delivered,],
-                                backgroundColor: ["#1AFF1A", "#FFA31A", "#F7604D"],
+                                backgroundColor: ["#F7604D", "#1AFF1A", "#FFA31A"],
                                 label: "Storage"
                             }
                         ],

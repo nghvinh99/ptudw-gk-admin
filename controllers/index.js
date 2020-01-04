@@ -1,5 +1,6 @@
 const passport = require('../config/passport');
 const { Order } = require('../models/');
+const { Product } = require('../models/');
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op
 
@@ -35,8 +36,18 @@ indexController.logout = (req, res, next) => {
     res.redirect('/');
 }
 
-indexController.dashboard = (req, res, next) => {
-    res.render('index', { title: 'Dashboard' });
+indexController.dashboard = async (req, res, next) => {
+    const top10 = await Product.findAll({
+        raw: true,
+        limit: 10,
+        order: [
+            ['sells', 'DESC']
+        ]
+    })
+    res.render('index', { 
+        title: 'Dashboard',
+        top10 
+    });
 }
 
 indexController.ordersState = async (req, res, next) => {
