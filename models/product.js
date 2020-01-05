@@ -35,7 +35,7 @@ module.exports = (sequelize, DataTypes) => {
       price: info.price,
       images: info.URLs,
       quantity: info.quantity,
-      views: '0',
+      sells: '0',
       brandId: info.brand,
       groupId: info.group,
       typeId: info.type

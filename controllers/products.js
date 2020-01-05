@@ -32,7 +32,6 @@ productsController.addBrand = (req, res, next) => {
 productsController.removeBrand = (req, res, next) => {
     const id = req.body.id;
     Brand.remove(id, (err, brand) => {
-        console.log(err);
         res.send({err, brand})
     })
 }

@@ -39,7 +39,7 @@ $(function () {
                         datasets: [
                             {
                                 data: [orders.Pending, orders.Delivering, orders.Delivered,],
-                                backgroundColor: ["#F7604D", "#1AFF1A", "#FFA31A"],
+                                backgroundColor: ["#F7604D", "#FFA31A", "#1AFF1A"],
                                 label: "Storage"
                             }
                         ],
@@ -54,25 +54,22 @@ $(function () {
                 drawPieChart(configPie);
             }
         });
-        $.ajax({
-            url: '/todayincome',
-            type: 'GET',
-            dataType: 'json',
-            success: () => {
-            }
-        });
+        fetchData();
     })
-
-
-
-
-
-
-    drawLineChart();
-    // drawBarChart();
-
-    $(window).resize(function () {
-        updateLineChart();
-        // updateBarChart();
-    });
 })
+
+function fetchData() {
+    const current = new Date();
+    const today = new Date(current.getFullYear(), current.getMonth(), current.getDate(), 0);
+    $.ajax({
+        url: '/reports/dayananlysis',
+        type: 'GET',
+        data: {
+            date: today
+        },
+        dataType: 'JSON',
+        success: (data) => {                 
+            drawLineChart('Đơn hàng', data.labels, data.dataset);
+        }
+    })
+}

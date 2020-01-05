@@ -13,83 +13,41 @@
 	<div class="container">
 		<div class="row tm-content-row">
 			<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 tm-block-col">
+				</br>
 				<h2 class="tm-block-title">Biểu đồ quý</h2>
+				<div class="row">
+					<div class="col-sm-6 col-12">
+						<select class="custom-select" name="quarterpicker" id="quarterpicker">
+							<option selected disabled hidden>Chọn quý...</option>
+							<% for(let i=0;i<4;i++) {%>
+							<option value="<%= i %>"><%= (i+1) %></option>
+							<% } %>
+						</select>
+					</div>
+					<div class="col-sm-6 col-12">
+						<select class="custom-select" name="yearpicker" id="yearpicker">
+							<option selected disabled hidden>Chọn năm...</option>
+							<% years.forEach( (year) => { %>
+							<option value="<%= year %>"><%= year %></option>
+							<% }) %>
+						</select>
+					</div>
+				</div>
 				<canvas id="lineChart"></canvas>
 			</div>
 		</div>
-		<div class="wrap-table100">
-			<div class="table100 ver1">
-				<div class="table100-firstcol">
-					<table>
-						<thead>
-							<tr class="row100 head">
-								<th class="cell100 column1">Quý</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr class="row100 body">
-								<td class="cell100 column1">Quý I/2019</td>
-							</tr>
-
-							<tr class="row100 body">
-								<td class="cell100 column1">Quý II/2019</td>
-							</tr>
-
-							<tr class="row100 body">
-								<td class="cell100 column1">Quý III/2019</td>
-							</tr>
-
-							<tr class="row100 body">
-								<td class="cell100 column1">Quý IV/2019</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-
-				<div class="wrap-table100-nextcols js-pscroll">
-					<div class="table100-nextcols">
-						<table>
-							<thead>
-								<tr class="row100 head">
-									<th class="cell100 column2">Tổng thu</th>
-									<th class="cell100 column3">Tổng chi</th>
-									<th class="cell100 column4">Thu nhập thực tế</th>
-									<th class="cell100 column5">Kì vọng</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr class="row100 body">
-									<td class="cell100 column2">300.000</td>
-									<td class="cell100 column3">100.000</td>
-									<td class="cell100 column4">200.000</td>
-									<td class="cell100 column5">300.000</td>
-								</tr>
-
-								<tr class="row100 body">
-									<td class="cell100 column2">350.000</td>
-									<td class="cell100 column3">50.000</td>
-									<td class="cell100 column4">300.000</td>
-									<td class="cell100 column5">350.000</td>
-								</tr>
-
-								<tr class="row100 body">
-									<td class="cell100 column2">200.000</td>
-									<td class="cell100 column3">0</td>
-									<td class="cell100 column4">200.000</td>
-									<td class="cell100 column5">300.000</td>
-								</tr>
-
-								<tr class="row100 body">
-									<td class="cell100 column2">400.000</td>
-									<td class="cell100 column3">100.000</td>
-									<td class="cell100 column4">300.000</td>
-									<td class="cell100 column5">250.000</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
+		<div class="">
+			<table class="table table-hover tm-table-small tm-product-table">
+				<thead>
+					<tr>
+						<th scope="col">THÁNG</th>
+						<th scope="col">SỐ LƯỢNG ĐƠN HÀNG</th>
+						<th scope="col">TỔNG THU</th>
+					</tr>
+				</thead>
+				<tbody id="analysisCol">
+				</tbody>
+			</table>
 		</div>
 	</div>
 
@@ -98,7 +56,7 @@
 	<% include scripts %>
 
 	<% include ../../elements/scripts %>
-	<script src="javascripts/quarter-chart.js"></script>
+	<script src="javascripts/ajax_report_quarter.js"></script>
 
 </body>
 

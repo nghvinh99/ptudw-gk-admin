@@ -38,7 +38,7 @@ function appendProductList(data) {
             <th class="single-product" scope="row">' + count + '</th>\
             <td class="single-product">' + product.name + '</td>\
             <td class="single-product">' + product.price + '</td>\
-            <td class="single-product">' + product.views + '</td>\
+            <td class="single-product">' + product.sells + '</td>\
             <td class="single-product">' + product.quantity + '</td>\
             <td><a class="tm-product-delete-link" onclick="removalConfirm('+ product.id + ')">\
             <i class="far fa-trash-alt tm-product-delete-icon"></i>\

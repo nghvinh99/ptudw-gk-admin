@@ -13,6 +13,22 @@ module.exports = (sequelize, DataTypes) => {
     freezeTableName: true
   });
 
+  Admin.editInfo = async (info, next) => {
+    Admin.update({
+      name: info.name,
+      email: info.email,
+      phone: info.phone,
+      DoB: new Date(info.DoB),
+      gender: info.gender
+    }, {
+      where: {id: info.id}
+    }).then(() => {
+      next(null);
+    }).catch((err) => {
+      next(err);
+    })
+  }
+
   Admin.prototype.validPassword = function(password, done) {
     bcrypt.compare(password, this.password, (err, res) => {
       return done(err, res);

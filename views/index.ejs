@@ -49,7 +49,7 @@
                                     <%  let count = 0; %>
                                     <% top10.forEach((item) => { %>
                                     <% count += 1; %>
-                                    <a href=""></a><tr style="cursor:pointer;" onclick="location.href='/products/edit/<%= item.id %>'">
+                                    <tr style="cursor:pointer;" onclick="location.href='/products/edit/<%= item.id %>'">
                                         <td><%= count %></td>
                                         <td class="tm-product-name"><%= item.name %></td>
                                         <td><%= item.sells %></td>
@@ -61,34 +61,14 @@
                         </div>
                     </div>
                 </div>
-
-
-
-                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
-                    <div class="tm-bg-primary-dark tm-block tm-block-taller tm-block-overflow">
-                        <h2 class="tm-block-title">Thông báo</h2>
-                        <div class="tm-notification-items">
-                            <div class="media tm-notification-item">
-                                <div class="tm-gray-circle"><img src="/images/notification-01.jpg" alt="Avatar Image"
-                                        class="rounded-circle"></div>
-                                <div class="media-body">
-                                    <p class="mb-2"><b>Hoa</b> và <b>6 người khác</b> gửi bạn <a href="/"
-                                            class="tm-notification-link">cập nhật sản phẩm mới</a>. Kiểm tra đơn hàng.</p>
-                                    <span class="tm-small tm-text-color-secondary">6 giờ trước.</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
         <% include elements/footer %>
     </div>
 
     <% include elements/scripts %>
-    <script src="javascripts/tooplate-scripts.js"></script>
     <script src="javascripts/ajax_index.js"></script>
-    <script src="javascripts/ajax_report.js"></script>
+    <script src="javascripts/chart.js"></script>
 </body>
 
 </html>

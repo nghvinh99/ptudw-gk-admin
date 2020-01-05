@@ -1,6 +1,7 @@
 const passport = require('../config/passport');
 const { Order } = require('../models/');
 const { Product } = require('../models/');
+const { Admin } = require('../models/');
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op
 
@@ -26,9 +27,8 @@ indexController.authentication = passport.authenticate('local',
     })
 
 indexController.authenticationCheck = (req, res, next) => {
-    next();
-    // if (req.isAuthenticated()) return next();
-    // res.redirect('/login');
+    if (req.isAuthenticated()) return next();
+    res.redirect('/login');
 }
 
 indexController.logout = (req, res, next) => {
@@ -60,29 +60,36 @@ indexController.ordersState = async (req, res, next) => {
     res.send(JSON.stringify(orders));
 }
 
-indexController.todayIncome = async (req, res, next) => {
-    const date = new Date();
-    console.log(date);
-    date.setHours(0);
-    date.setMinutes(0);
-    date.setSeconds(0);
-    console.log(date);
-    const d = new Date();
-    d.setHours(23);
-    d.setMinutes(59);
-    d.setSeconds(58);
-    console.log(d);
-    const order = await Order.findAll({
-        raw: true,
-        where: {
-            updatedAt: {
-                [Op.between]: [date, d]
-            }
-        },
-        attributes: ['cost']
+indexController.myProfile = async (req, res, next) => {
+    admin = req.user;
+    const date = new Date(admin.DoB);
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    res.render('profile', {
+        title: 'Cá nhân',
+        admin, day, month, year
     })
-    console.log(order);
-    res.end();
+}
+
+indexController.updateProfile = (req, res, next) => {
+    const adminId = req.user.id;
+    const info = {
+        id: adminId,
+        name: req.body.name,
+        email: req.body.email,
+        phone: req.body.phone,
+        DoB: req.body.DoB,
+        gender: req.body.gender
+    }
+    console.log(info);
+    console.log(new Date(info.DoB));
+    Admin.editInfo(info, (err) => {
+        console.log("OK");
+        if (err) {
+            console.log(err);
+        } else res.redirect('/');
+    });
 }
 
 module.exports = indexController;

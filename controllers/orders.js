@@ -25,7 +25,6 @@ ordersController.getOrders = async (req, res, next) => {
         })
         usernames.push(usrname);
     }
-    console.log(usernames);
     res.render('pages/orders/list', { 
         title: 'Đơn hàng',
         orders, usernames
