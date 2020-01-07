@@ -16,6 +16,10 @@
 
 ## Thông tin đồ án:
 
+Username: admin
+
+Password: admin
+
 ### Trang admin cửa hàng Winter bán các loại trang phục theo hình thức giao dịch online
 
 - Nền tảng: nodejs
@@ -25,10 +29,32 @@
 - Sử dụng ORM Sequelize
 - Các chức năng hiện tại
   - Trang chủ
+  
   - Đăng nhập/Đăng xuất (local passportjs)
-  - Add sản phẩm (on progress)
-
-
+  
+  - Thêm/xóa/cập nhật sản phẩm (có đăng tải hình đại diện)
+  
+  - Thêm/xóa loại sản phẩm/hãng sản xuất/nhóm sản phẩm
+  
+  - Lọc sản phẩm theo loại sản phẩm/hãng sản xuất/nhóm sản phẩm
+  
+  - Xem thông tin tài khoản người dùng
+  
+  - Khóa tài khoản người dùng
+  
+  - Cập nhật thông tin tài khoản admin
+  
+  - Phân trang trang sản phẩm/tài khoản người dùng
+  
+  - Thống kê doanh thu theo ngày/tuần/tháng/năm/quý
+  
+  - Vẽ biểu đồ thống kê
+  
+  - Quản lí đơn hàng
+  
+  - Liệt kê top 10 sản phẩm bán chạy ở Dashboard
+  
+    
 
 
 
